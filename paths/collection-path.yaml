@@ -14,13 +14,15 @@ get:
       required: false
       schema:
         type: integer
+        default: 1
     - name: nav
       in: path
       description: Determines whether the content of the member property represents parent or child items.
-      required: true
+      required: false
       schema:
         type: string
         enum: [ children, parents ]
+        default: children
   responses:
     "200":
       description: OK
