@@ -23,13 +23,7 @@ docker run openapitools/openapi-generator-cli help generate
 Generating a typescript client based on Axios:
 
 ```shell
-docker run \
-	   -v ${PWD}:/local \
-	   openapitools/openapi-generator-cli generate \
-	   -i /local/static-collection-openapi.yaml \
-	   -g typescript-axios \
-	   -o /local/out/typescript-axios \
-	   -c /local/config/typescript-axios.yaml
+docker run -v ${PWD}:/local openapitools/openapi-generator-cli batch /local/config-ts-axious.yaml --root-dir /local
 ```
 
 Types (interfaces) are in `out/typescript-axios/dts-types/*.ts`:

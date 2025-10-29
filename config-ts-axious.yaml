@@ -1,0 +1,11 @@
+# see https://openapi-generator.tech/docs/generators/typescript-axios/
+
+inputSpec: /local/static-collection-openapi.yaml
+outputDir: out/typescript-axios
+generatorName: typescript-axios
+additionalProperties:
+  withSeparateModelsAndApi: true
+  apiPackage: dts-api
+  modelPackage: dts-types
+  withInterfaces: true
+  npmName: "@scdhapis/dts-api"
