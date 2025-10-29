@@ -7,5 +7,5 @@ stages:
 validate:
   stage: test
   script:
-    - openapi-generator-cli validate -i *.yaml
+    - openapi-generator-cli validate -i *-openapi.yaml
 
