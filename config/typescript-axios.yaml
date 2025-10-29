@@ -1,0 +1,7 @@
+# see https://openapi-generator.tech/docs/generators/typescript-axios/
+
+withSeparateModelsAndApi: true
+apiPackage: dts-api
+modelPackage: dts-types
+withInterfaces: true
+npmName: "@scdh/dts-api"

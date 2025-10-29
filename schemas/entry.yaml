@@ -1,0 +1,30 @@
+type: object
+required:
+  - "@id"
+  - "@type"
+  - dtsVersion
+  - collection
+  - navigation
+  - document
+properties:
+  "@id":
+    type: string
+    description: The identifier of the API, generally its URL.
+  "@type":
+    type: string
+    description: Default Value. EntryPoint.
+  dtsVersion:
+    type: string
+    description: The version of the DTS specification providing the response.
+  collection:
+    type: string
+    format: uri-template
+    description: Link to the Collection API endpoint.
+  navigation:
+    type: string
+    format: uri-template
+    description: Link to the Navigation API endpoint.
+  document:
+    type: string
+    format: uri-template
+    description: Link to the Document API endpoint.
