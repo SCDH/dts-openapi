@@ -20,11 +20,14 @@ properties:
     type: string
     format: uri-template
     description: Link to the Collection API endpoint.
+    example: /collection/{?id,page,nav}/d.json
   navigation:
     type: string
     format: uri-template
     description: Link to the Navigation API endpoint.
+    example: https://generic-dts.example.com/dts/navigation/{?resource,ref,start,end,down,tree,page}
   document:
     type: string
     format: uri-template
     description: Link to the Document API endpoint.
+    example: https://generic-dts.example.com/dts/document/{?resource,ref,start,end,tree,mediaType}
