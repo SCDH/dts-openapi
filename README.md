@@ -1,8 +1,15 @@
 # DTS OpenAPI Specs
 
+This project provides a OpenAPI specification for [Distributed Text
+Services
+(DTS)](https://distributed-text-services.github.io/specifications/)
+and thus enables developers to generate client code or server stubs.
 
-## OpenAPI Generator CLI with Docker
+## Getting Started
 
+The most straight forward way to run the [**OpenAPI Generator
+CLI**](https://openapi-generator.tech) is using the [Docker
+image](https://openapi-generator.tech/docs/installation#docker):
 
 
 ```shell
@@ -12,6 +19,8 @@ docker run openapitools/openapi-generator-cli help
 ```shell
 docker run openapitools/openapi-generator-cli help generate
 ```
+
+Generating a typescript client based on Axios:
 
 ```shell
 docker run \
