@@ -1,0 +1,11 @@
+images: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
+
+stages:
+  - test
+
+
+validate:
+  stage: test
+  script:
+    - openapi-generator-cli valiate -i *.yaml
+
