@@ -1,4 +1,4 @@
-images: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
+image: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
 
 stages:
   - test
