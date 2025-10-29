@@ -7,44 +7,7 @@ info:
 
 paths:
   /entry:
-    get:
-      operationId: entry
-      summary: GET request on the entry endpoint of the DTS API
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: './schemas/entry.yaml'
-        "5XX":
-          description: Unexpected error
+    $ref: "./paths/entry.yaml"
 
   /collection/{id}/{page}/{nav}.json:
-    get:
-      operationId: collection
-      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
-      parameters:
-        - name: id
-          description: Identifier for a collection or document.
-          required: true
-          schema:
-            type: string
-        - name: page
-          description: Page of the current collection’s members
-          required: false
-          schema:
-            type: integer
-        - name: nav
-          description: Determines whether the content of the member property represents parent or child items.
-          required: true
-          schema:
-            type: string
-            enum: [ children, parents ]
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: './schemas/collection.yaml'
+    $ref: "./paths/collection-path.yaml"
