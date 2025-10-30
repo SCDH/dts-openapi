@@ -55,6 +55,7 @@ deploy-typescript-axious:
   needs:
     - build-typescript-axios
   script:
+    - cd target/typescript-axios
     - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - cat .npmrc
@@ -70,6 +71,7 @@ deploy-prerelease-typescript-axious:
   needs:
     - build-typescript-axios
   script:
+    - cd target/typescript-axios
     - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - cat .npmrc
