@@ -1,5 +1,6 @@
 variables:
   NPM_PREFIX: "@scdhapi"
+  ARTIFACT_DIR: out
 
 
 .release_rules_tag:
@@ -24,14 +25,17 @@ validate:
     - openapi-generator-cli validate -i *-openapi.yaml
 
 generate:
-  image: harbor.uni-muenster.de/proxy-docker/library/eclipse-temurin:21
+  image: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
   stage: generate
+  before_script:
+    - apt-get -y install sed
   script:
-    - ./mvnw -Drevision=$CI_COMMIT_REF_NAME -Dchangelist="" -Dnpm-package-name.prefix=$NPM_PREFIX package
-    - ls -l target
+    - oagen/fix-paths.sed --in-place oagen/*.yaml
+    - openapi-generator-cli batch oagen/*.yaml
+    - ls -l $ARTIFACT_DIR
   artifacts:
     paths:
-      - target
+      - $ARTIFACT_DIR
     expire_in: 1 hour
 
 
@@ -41,12 +45,12 @@ build-typescript-axios:
   needs:
     - generate
   script:
-    - cd target/typescript-axios
+    - cd $ARTIFACT_DIR/typescript-axios
     - npm i
     - npm run build
   artifacts:
     paths:
-      - target/typescript-axios
+      - $ARTIFACT_DIR/typescript-axios
     expire_in: 1 hour
 
 deploy-typescript-axious:
@@ -55,7 +59,7 @@ deploy-typescript-axious:
   needs:
     - build-typescript-axios
   script:
-    - cd target/typescript-axios
+    - cd $ARTIFACT_DIR/typescript-axios
     - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - cat .npmrc
@@ -71,7 +75,7 @@ deploy-prerelease-typescript-axious:
   needs:
     - build-typescript-axios
   script:
-    - cd target/typescript-axios
+    - cd $ARTIFACT_DIR/typescript-axios
     - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - cat .npmrc
