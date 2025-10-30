@@ -1,37 +1,38 @@
-Collection:
-  type: object
-  required:
-    - "@id"
-    - "@type"
-    - dtsVersion
-    - title
-    - totalParents
-    - totalChildren
-  properties:
-    "@id":
-      type: string
-      description: The identifier of the Collection or Resource.
-    "@type":
-      type: string
-      description: The type. Collection or Resource.
-      enum: [ Collection, Resource ]
-    dtsVersion:
-      type: string
-      description: The version of the DTS specification providing the response.
-    title:
-      type: string
-      description: A name for the Collection or Resource. Additional names may be placed in dublinCore using title, e.g. for internationalization.
-    totalParents:
-      type: integer
-      description: Total number of parent Collections or Resources.
-    totalChildren:
-      type: integer
-      description: Total number of child Collections or Resources.
-    member:
-      type: array
-      items:
-        $ref: '#/Collection'
-        # oneOf:
-        #   - $ref: '#Collection'
-        #   - $ref: 'id.yaml#Id'
-        
+components:
+  schemas:
+    Collection:
+      type: object
+      required:
+        - "@id"
+        - "@type"
+        - dtsVersion
+        - title
+        - totalParents
+        - totalChildren
+      properties:
+        "@id":
+          type: string
+          description: The identifier of the Collection or Resource.
+        "@type":
+          type: string
+          description: The type. Collection or Resource.
+          enum: [ Collection, Resource ]
+        dtsVersion:
+          type: string
+          description: The version of the DTS specification providing the response.
+        title:
+          type: string
+          description: A name for the Collection or Resource. Additional names may be placed in dublinCore using title, e.g. for internationalization.
+        totalParents:
+          type: integer
+          description: Total number of parent Collections or Resources.
+        totalChildren:
+          type: integer
+          description: Total number of child Collections or Resources.
+        member:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Collection'
+              - $ref: 'id.yaml#/components/schemas/Id'
+

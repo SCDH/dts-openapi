@@ -37,13 +37,15 @@ out/
     ├── common.ts
     ├── configuration.ts
     ├── docs
-    │   ├── Collection200Response.md
+    │   ├── Collection.md
+    │   ├── CollectionMemberInner.md
     │   ├── DefaultApi.md
     │   └── Entry200Response.md
     ├── dts-api
     │   └── default-api.ts
     ├── dts-types
-    │   ├── collection200-response.ts
+    │   ├── collection-member-inner.ts
+    │   ├── collection.ts
     │   ├── entry200-response.ts
     │   └── index.ts
     ├── git_push.sh
@@ -51,9 +53,13 @@ out/
     ├── package.json
     ├── README.md
     └── tsconfig.json
- 
-5 directories, 16 files
+
+5 directories, 18 files
 ```
+
+# Contributing
+
+See [contributing](CONTRIBUTING.md) guide.
 
 
 # Further Reading
@@ -62,4 +68,5 @@ out/
 - OpenAPI Specs https://spec.openapis.org/oas/latest.html#schema-object
 - Swagger Data Types https://swagger.io/docs/specification/v3_0/data-models/data-types/
 - Using OpenAPI Generator CLI: https://openapi-generator.tech/docs/usage
-
+- schema for inhomogeneous lists: https://stackoverflow.com/questions/47656791/openapi-multiple-types-inside-an-array
+- splitting OpenAPI into several files: https://blog.pchudzik.com/202004/open-api-and-external-ref/

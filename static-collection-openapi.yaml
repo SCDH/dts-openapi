@@ -28,6 +28,6 @@ paths:
 components:
   schemas:
     Collection:
-      $ref: 'schemas/collection.yaml#Collection'
+      $ref: 'schemas/collection.yaml#/components/schemas/Collection'
     Id:
-      $ref: 'schemas/id.yaml#Id'
+      $ref: 'schemas/id.yaml#/components/schemas/Id'
