@@ -1,0 +1,15 @@
+# see https://openapi-generator.tech/docs/generators/typescript-axios/
+
+# The /local absolute path is due to using docker! TODO!
+
+inputSpec: /local/static-collection-openapi.yaml
+outputDir: /local/out/typescript-axios
+generatorName: typescript-axios
+additionalProperties:
+  withSeparateModelsAndApi: true
+  apiPackage: dts-api
+  modelPackage: dts-types
+  withInterfaces: true
+  npmName: "@scdhapis/dts-api"
+  # set by `npm version` in CI/CD pipeline
+  npmVersion: 0.0.0
