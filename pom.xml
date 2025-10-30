@@ -12,6 +12,8 @@
   <url>http://github.com/scdh/dts-openapi-spect</url>
 
   <properties>
+    <npm-package-name.prefix>@scdhapis</npm-package-name.prefix>
+    
     <slf4j.version>2.0.6</slf4j.version>
     <openapi-generator.version>7.17.0</openapi-generator.version>
 
@@ -124,7 +126,7 @@
 		<apiPackage>dts-api</apiPackage>
 		<modelPackage>dts-types</modelPackage>
 		<withInterfaces>true</withInterfaces>
-		<npmName>@scdhapis/dts-api</npmName>
+		<npmName>${npm-package-name.prefix}/dts-api</npmName>
 		<npmVersion>${revision}${changelist}</npmVersion>
 	      </configOptions>
             </configuration>
