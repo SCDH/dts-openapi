@@ -16,9 +16,10 @@ by OpenAPI
   OpenAPI/SwaggerUI knows all URLs in advance
 
 Nonetheless, OpenAPI specs for DTS are valuable because they enable
-developers to generate boilerplate client code or server stubs. In
-order to cope with DTS's flexibility, the project splits the specs
-into several files for re-use and re-combination.
+developers to generate boilerplate client code or server stubs. The
+very fact of having data types generated for client or server is a
+clear profit. In order to cope with DTS's flexibility, the project
+splits the specs into several files for re-use and re-combination.
 
 ## Getting Started
 
@@ -71,6 +72,13 @@ out
 
 5 directories, 18 files
 ```
+
+# Files and Directories
+
+- `*-openapi.yaml`: OpenAPI specs
+- `schemas/*.yaml`: OpenAPI schema specifications for re-use
+- `params/*.yaml`: OpenAPI parameter specifications for re-use
+- `oagen/*.yaml`: configuration files for OpenAPI Generator
 
 # Contributing
 
