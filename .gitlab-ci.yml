@@ -1,5 +1,5 @@
 variables:
-  NPM_PREFIX: @scdhapi
+  NPM_PREFIX: "@scdhapi"
 
 
 .release_rules_tag:
@@ -32,7 +32,7 @@ generate:
   artifacts:
     paths:
       - target
-    expires_in: 1 hour
+    expire_in: 1 hour
 
 build-typescript-axios:
   image: harbor.uni-muenster.de/proxy-docker/library/node:latest
@@ -46,7 +46,7 @@ build-typescript-axios:
   artifacts:
     paths:
       - target/typescript-axios
-    expires_in: 1 hour
+    expire_in: 1 hour
 
 deploy-typescript-axious:
   image: harbor.uni-muenster.de/proxy-docker/library/node:latest
