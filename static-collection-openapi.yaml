@@ -14,9 +14,9 @@ paths:
       operationId: collection
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: 'params/collection.yaml#PathId'
-        - $ref: 'params/collection.yaml#PathPage'
-        - $ref: 'params/collection.yaml#PathNav'
+        - $ref: 'params/collection.yaml#/PathId'
+        - $ref: 'params/collection.yaml#/PathPage'
+        - $ref: 'params/collection.yaml#/PathNav'
       responses:
         "200":
           description: OK
