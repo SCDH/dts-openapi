@@ -1,9 +1,21 @@
 # DTS OpenAPI Specs
 
-This project provides a OpenAPI specification for [Distributed Text
+This project provides an OpenAPI specification for [Distributed Text
 Services
-(DTS)](https://distributed-text-services.github.io/specifications/)
-and thus enables developers to generate client code or server stubs.
+(DTS)](https://distributed-text-services.github.io/specifications/).
+
+There DTS make use of some very powerful techniques that hardly can be specified with OpenAPI:
+
+- the superb entry endpoint allows API endpoints to be spread over
+  multiple base URLs or add other custom endpoints
+- the use of URI templates is only [partly
+supported](https://stackoverflow.com/questions/74577285/does-openapi-allow-using-rfc-6570-template-syntax-in-path-templates)
+by OpenAPI
+
+Nonetheless, OpenAPI specs for DTS are valuable because it enables
+developers to generate client code or server stubs. In order to cope
+with DTS's flexibility, the project splits the specs into several
+files for re-use and re-combination.
 
 ## Getting Started
 
@@ -53,7 +65,7 @@ out
     ├── package.json
     ├── README.md
     └── tsconfig.json
- 
+
 5 directories, 18 files
 ```
 
