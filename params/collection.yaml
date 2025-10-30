@@ -10,7 +10,7 @@ PathPage:
   name: page
   in: path
   description: Page of the current collection’s members
-  required: true
+  required: false
   schema:
     type: integer
     default: 1
@@ -19,7 +19,7 @@ PathNav:
   name: nav
   in: path
   description: Determines whether the content of the member property represents parent or child items.
-  required: true
+  required: false
   schema:
     type: string
     enum: [ children, parents ]
