@@ -2,20 +2,23 @@
 
 This project provides an OpenAPI specification for [Distributed Text
 Services
-(DTS)](https://distributed-text-services.github.io/specifications/).
-
-There DTS make use of some very powerful techniques that hardly can be specified with OpenAPI:
+(DTS)](https://distributed-text-services.github.io/specifications/). RESTful
+DTS make use of some very powerful techniques that can hardly be
+mastered with OpenAPI:
 
 - the superb entry endpoint allows API endpoints to be spread over
-  multiple base URLs or add other custom endpoints
+  multiple base URLs or to add other custom endpoints
 - the use of URI templates is only [partly
 supported](https://stackoverflow.com/questions/74577285/does-openapi-allow-using-rfc-6570-template-syntax-in-path-templates)
 by OpenAPI
+- DTS is designed upon the
+  [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS), while
+  OpenAPI/SwaggerUI knows all URLs in advance
 
-Nonetheless, OpenAPI specs for DTS are valuable because it enables
-developers to generate client code or server stubs. In order to cope
-with DTS's flexibility, the project splits the specs into several
-files for re-use and re-combination.
+Nonetheless, OpenAPI specs for DTS are valuable because they enable
+developers to generate boilerplate client code or server stubs. In
+order to cope with DTS's flexibility, the project splits the specs
+into several files for re-use and re-combination.
 
 ## Getting Started
 
