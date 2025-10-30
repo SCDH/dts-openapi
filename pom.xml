@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.ulbms.scdh.dts</groupId>
+  <artifactId>dts-openapi-specs</artifactId>
+  <version>${revision}${changelist}</version>
+
+  <name>DTS OpenAPI Specs</name>
+  <description>OpenAPI specs for Distributed Text Services</description>
+  <url>http://github.com/scdh/dts-openapi-spect</url>
+
+  <properties>
+    <slf4j.version>2.0.6</slf4j.version>
+    <openapi-generator.version>7.17.0</openapi-generator.version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <distribution.url>${env.CI_API_V4_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
+  </properties>
+
+  <dependencies>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>${distribution.url}</url>
+    </repository>
+  </repositories>
+
+  <!-- get the build artifacts into the gitlab maven package registry -->
+  <distributionManagement>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>${distribution.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>gitlab-maven</id>
+      <url>${distribution.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+
+      <!-- Do not make a JAR-file! -->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.2.2</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase>none</phase>
+            <configuration>
+              <finalName>unwanted</finalName>
+              <classifier>unwanted</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+	<groupId>org.openapitools</groupId>
+	<artifactId>openapi-generator-maven-plugin</artifactId>
+	<version>${openapi-generator.version}</version>
+	<executions>
+
+          <execution>
+	    <id>generate-typescript-axios-of-static-collection</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/static-collection-openapi.yaml</inputSpec>
+              <generatorName>typescript-axios</generatorName>
+              <output>${project.build.directory}/typescript-axios</output>
+	      <configOptions>
+		<withSeparateModelsAndApi>true</withSeparateModelsAndApi>
+		<apiPackage>dts-api</apiPackage>
+		<modelPackage>dts-types</modelPackage>
+		<withInterfaces>true</withInterfaces>
+		<npmName>@scdhapis/dts-api</npmName>
+		<npmVersion>${revision}${changelist}</npmVersion>
+	      </configOptions>
+            </configuration>
+          </execution>
+
+	</executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
