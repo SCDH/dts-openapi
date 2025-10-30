@@ -7,7 +7,18 @@ info:
 
 paths:
   /entry:
-    $ref: "./paths/entry.yaml"
+    get:
+      operationId: entry
+      summary: GET request on the entry endpoint of the DTS API
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+        "5XX":
+          description: Unexpected error
 
   /collection/{id}/{page}/{nav}.json:
     get:
@@ -27,6 +38,8 @@ paths:
 
 components:
   schemas:
+    Entry:
+      $ref: 'schemas/entry.yaml#/components/schemas/Entry'
     Collection:
       $ref: 'schemas/collection.yaml#/components/schemas/Collection'
     Id:

@@ -30,7 +30,7 @@ Types (interfaces) are in `out/typescript-axios/dts-types/*.ts`:
 
 ```shell
 $ tree out/
-out/
+out
 └── typescript-axios
     ├── api.ts
     ├── base.ts
@@ -40,20 +40,20 @@ out/
     │   ├── Collection.md
     │   ├── CollectionMemberInner.md
     │   ├── DefaultApi.md
-    │   └── Entry200Response.md
+    │   └── Entry.md
     ├── dts-api
     │   └── default-api.ts
     ├── dts-types
     │   ├── collection-member-inner.ts
     │   ├── collection.ts
-    │   ├── entry200-response.ts
+    │   ├── entry.ts
     │   └── index.ts
     ├── git_push.sh
     ├── index.ts
     ├── package.json
     ├── README.md
     └── tsconfig.json
-
+ 
 5 directories, 18 files
 ```
 
