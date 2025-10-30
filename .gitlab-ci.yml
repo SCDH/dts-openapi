@@ -27,7 +27,7 @@ generate:
   image: harbor.uni-muenster.de/proxy-docker/library/eclipse-temurin:21
   stage: generate
   script:
-    - ./mvnw -Drevision=$GIT_COMMIT_REF_NAME -Dchangelist="" -Dnpm-package-name.prefix=$NPM_PREFIX package
+    - ./mvnw -Drevision=$GIT_COMMIT_TAG -Dchangelist="" -Dnpm-package-name.prefix=$NPM_PREFIX package
     - ls -l target
   artifacts:
     paths:
