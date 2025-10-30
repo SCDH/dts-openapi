@@ -89,7 +89,7 @@ out
 ## Maven builds
 
 This project uses
-[Maven](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/integration.md),
+[Maven](https://github.com/OpenAPITools/openapi-generator/tree/master?tab=readme-ov-file#32---workflow-integration-maven-gradle-github-cicd),
 because it enables us to keep all the configurations for the generated
 packages in one place. That's important for propagating the same
 release numbers to all artifacts. Single source of truth for release
