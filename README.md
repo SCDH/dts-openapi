@@ -84,7 +84,7 @@ out
 - `*-openapi.yaml`: OpenAPI specs
 - `schemas/*.yaml`: OpenAPI schema specifications for re-use
 - `params/*.yaml`: OpenAPI parameter specifications for re-use
-- `pom.xml`: Maven project file for homogenously generating all artifacts
+- `pom.xml`: Maven project with config for homogenously generating all artifacts
 
 ## Maven builds
 
