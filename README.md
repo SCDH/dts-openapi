@@ -39,7 +39,13 @@ docker run openapitools/openapi-generator-cli help generate
 Generating a typescript client based on Axios:
 
 ```shell
-docker run -v ${PWD}:/local openapitools/openapi-generator-cli batch /local/config-ts-axios.yaml --root-dir /local
+docker run \
+	   -v ${PWD}:/local \
+	   openapitools/openapi-generator-cli generate \
+	   -i /local/static-collection-openapi.yaml \
+	   -g typescript-axios \
+	   -o /local/out/typescript-axios \
+	   --additional-properties=withSeparateModelsAndApi=true,apiPackage=dts-api,modelPackage=dts-types,withInterfaces=true,npmName="@scdhapis/dts-api"
 ```
 
 Types (interfaces) are in `out/typescript-axios/dts-types/*.ts`:
@@ -73,19 +79,29 @@ out
 5 directories, 18 files
 ```
 
-# Files and Directories
+## Files and Directories
 
 - `*-openapi.yaml`: OpenAPI specs
 - `schemas/*.yaml`: OpenAPI schema specifications for re-use
 - `params/*.yaml`: OpenAPI parameter specifications for re-use
-- `oagen/*.yaml`: configuration files for OpenAPI Generator
+- `pom.xml`: Maven project file for homogenously generating all artifacts
 
-# Contributing
+## Maven builds
+
+This project uses
+[Maven](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/integration.md),
+because it enables us to keep all the configurations for the generated
+packages in one place. That's important for propagating the same
+release numbers to all artifacts. Single source of truth for release
+numbers are git commit tags.
+
+
+## Contributing
 
 See [contributing](CONTRIBUTING.md) guide.
 
 
-# Further Reading
+## Further Reading
 
 - OpenAPI Getting Started https://learn.openapis.org/
 - OpenAPI Specs https://spec.openapis.org/oas/latest.html#schema-object
