@@ -10,4 +10,24 @@ paths:
     $ref: "./paths/entry.yaml"
 
   /collection/{id}/{page}/{nav}.json:
-    $ref: "./paths/collection-path.yaml"
+    get:
+      operationId: collection
+      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      parameters:
+        - $ref: 'params/collection.yaml#PathId'
+        - $ref: 'params/collection.yaml#PathPage'
+        - $ref: 'params/collection.yaml#PathNav'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+
+components:
+  schemas:
+    Collection:
+      $ref: 'schemas/collection.yaml#Collection'
+    Id:
+      $ref: 'schemas/id.yaml#Id'
