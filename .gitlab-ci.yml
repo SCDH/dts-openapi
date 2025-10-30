@@ -33,6 +33,9 @@ generate:
     paths:
       - target
     expire_in: 1 hour
+  rules:
+    - !reference [ .release_rules_tag, rules ]
+    - !reference [ .prerelease_rules_tag, rules ]
 
 build-typescript-axios:
   image: harbor.uni-muenster.de/proxy-docker/library/node:latest
