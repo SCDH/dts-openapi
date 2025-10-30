@@ -46,7 +46,10 @@ generic-package:
     - apt-get -y install curl zip
   script:
     - zip ${CI_PROJECT_NAMESPACE_SLUG}-${CI_COMMIT_TAG}.zip *.yaml schemas/* params/*
-    - curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}"  --upload-file ${CI_PROJECT_NAMESPACE_SLUG}-${CI_COMMIT_TAG}.zip  ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${CI_PROJECT_NAMESPACE_SLUG}/${CI_COMMIT_TAG}/${CI_PROJECT_NAMESPACE_SLUG}-${CI_COMMIT_TAG}.zip
+    - |
+        curl --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+        --upload-file ${CI_PROJECT_NAMESPACE_SLUG}-${CI_COMMIT_TAG}.zip \
+        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${CI_PROJECT_NAMESPACE_SLUG}/${CI_COMMIT_TAG}/${CI_PROJECT_NAMESPACE_SLUG}-${CI_COMMIT_TAG}.zip
   rules:
     - if: $CI_COMMIT_TAG
 
