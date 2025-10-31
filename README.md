@@ -26,8 +26,8 @@ splits the specs into several files for re-use and re-combination.
   1. have to implement URI templates for **getting** data from a DTS
 	 service. Currently, this aspect cannot be expressed (AFAIK) by
 	 OpenAPI.
-  1. can use the types generated from the OpenAPI specs for the
-     **response body**.
+  1. can use the types and parsing functions generated from the
+     OpenAPI specs for the **response body**.
 
 
 ## Getting Started
@@ -88,21 +88,20 @@ out
 5 directories, 18 files
 ```
 
+Use the `openapi-generator batch` command with config files under `oagen`:
+
+```shell
+docker run -v ${PWD}:/local openapitools/openapi-generator-cli batch /local/client-typescript.yaml --root-dir /local
+```
+
+
 ## Files and Directories
 
 - `*-openapi.yaml`: OpenAPI specs
 - `schemas/*.yaml`: OpenAPI schema specifications for re-use
 - `params/*.yaml`: OpenAPI parameter specifications for re-use
-- `pom.xml`: Maven project with config for homogenously generating all artifacts
+- `oagen/*.yaml`: config files for OpenAPI generator
 
-## Maven builds
-
-This project uses
-[Maven](https://github.com/OpenAPITools/openapi-generator/tree/master?tab=readme-ov-file#32---workflow-integration-maven-gradle-github-cicd),
-because it enables us to keep all the configurations for the generated
-packages in one place. That's important for propagating the same
-release numbers to all artifacts. Single source of truth for release
-numbers are git commit tags.
 
 
 ## Contributing
@@ -118,3 +117,6 @@ See [contributing](CONTRIBUTING.md) guide.
 - Using OpenAPI Generator CLI: https://openapi-generator.tech/docs/usage
 - schema for inhomogeneous lists: https://stackoverflow.com/questions/47656791/openapi-multiple-types-inside-an-array
 - splitting OpenAPI into several files: https://blog.pchudzik.com/202004/open-api-and-external-ref/
+- OpenAPI and RFC6570 URI templates:
+  - https://stackoverflow.com/questions/74577285/does-openapi-allow-using-rfc-6570-template-syntax-in-path-templates
+  - https://github.com/swaggerexpert/openapi-server-url-templating
