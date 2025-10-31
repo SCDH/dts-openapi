@@ -21,6 +21,15 @@ very fact of having data types generated for client or server is a
 clear profit. In order to cope with DTS's flexibility, the project
 splits the specs into several files for re-use and re-combination.
 
+- DTS Servers can fully use OpenAPI specs to describe their endpoints.
+- DTS Clients
+  1. have to implement URI templates for **getting** data from a DTS
+	 service. Currently, this aspect cannot be expressed (AFAIK) by
+	 OpenAPI.
+  1. can use the types generated from the OpenAPI specs for the
+     **response body**.
+
+
 ## Getting Started
 
 The most straight forward way to run the [**OpenAPI Generator
