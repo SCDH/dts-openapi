@@ -44,3 +44,11 @@ components:
       $ref: 'schemas/collection.yaml#/components/schemas/Collection'
     Id:
       $ref: 'schemas/id.yaml#/components/schemas/Id'
+    LODContext:
+      $ref: 'schemas/context.yaml#/components/schemas/LODContext'
+    ContextUri:
+      $ref: 'schemas/context.yaml#/components/schemas/ContextUri'
+    ContextObject:
+      $ref: 'schemas/context.yaml#/components/schemas/ContextObject'
+    ContextArray:
+      $ref: 'schemas/context.yaml#/components/schemas/ContextArray'

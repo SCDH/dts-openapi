@@ -1,0 +1,20 @@
+components:
+  schemas:
+    LODContext:
+      type:
+        oneOf:
+          - $ref: '#/components/schemas/ContextUri'
+          - $ref: '#/components/schemas/ContextObject'
+          - $ref: '#/components/schemas/ContextArray'
+      description: The JSON-LD context.
+    ContextUri:
+      type: string
+      description: A context URI
+    ContextObject:
+      type: object
+      description: An advanced JSON-LD context.
+    ContextArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/LODContext'
+      description: An advanced JSON-LD context.

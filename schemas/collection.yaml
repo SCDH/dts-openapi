@@ -10,6 +10,10 @@ components:
         - totalParents
         - totalChildren
       properties:
+        "@context":
+          type:
+            $ref: 'context.yaml#/components/schemas/LODContext'
+          description: The JSON-LD context.
         "@id":
           type: string
           description: The identifier of the Collection or Resource.
