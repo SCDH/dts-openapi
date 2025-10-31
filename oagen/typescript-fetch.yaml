@@ -1,0 +1,23 @@
+# see https://openapi-generator.tech/docs/generators/typescript-fetch/
+
+# We use the typescript-fetch generator because it introduces no
+# dependencies. The fetching part (api) will have to be done by URI template
+# mechanism.
+
+# The /local absolute path is due to using docker! TODO!
+
+inputSpec: /local/static-collection-openapi.yaml
+outputDir: /local/out/typescript-fetch
+generatorName: typescript-fetch
+additionalProperties:
+  disallowAdditionalPropertiesIfNotPresent: false
+  enumUnknownDefaultCase: true
+  licenseName: MIT
+  sortModelPropertiesByRequiredFlag: false
+  sortParamsByRequiredFlag: false
+  useSingleRequestParameter: true
+  withSeparateModelsAndApi: true
+  withInterfaces: true
+  npmName: "@scdhapis/dts-api-fetch"
+  # set by `npm version` in CI/CD pipeline
+  npmVersion: 0.0.0

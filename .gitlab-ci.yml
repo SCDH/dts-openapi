@@ -53,7 +53,7 @@ build-typescript-axios:
       - $ARTIFACT_DIR/typescript-axios
     expire_in: 1 hour
 
-deploy-typescript-axious:
+deploy-typescript-axios:
   image: harbor.uni-muenster.de/proxy-docker/library/node:latest
   stage: deploy
   needs:
@@ -69,13 +69,59 @@ deploy-typescript-axious:
     - !reference [ .release_rules_tag, rules ]
 
 # the pre-release is tagged "next"
-deploy-prerelease-typescript-axious:
+deploy-prerelease-typescript-axios:
   image: harbor.uni-muenster.de/proxy-docker/library/node:latest
   stage: deploy
   needs:
     - build-typescript-axios
   script:
     - cd $ARTIFACT_DIR/typescript-axios
+    - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    - cat .npmrc
+    - npm --no-git-tag-version version $CI_COMMIT_TAG
+    - npm publish --tag next
+  rules:
+    - !reference [ .prerelease_rules_tag, rules ]
+
+
+build-typescript-fetch:
+  image: harbor.uni-muenster.de/proxy-docker/library/node:latest
+  stage: build
+  needs:
+    - generate
+  script:
+    - cd $ARTIFACT_DIR/typescript-fetch
+    - npm i
+    - npm run build
+  artifacts:
+    paths:
+      - $ARTIFACT_DIR/typescript-fetch
+    expire_in: 1 hour
+
+deploy-typescript-fetch:
+  image: harbor.uni-muenster.de/proxy-docker/library/node:latest
+  stage: deploy
+  needs:
+    - build-typescript-fetch
+  script:
+    - cd $ARTIFACT_DIR/typescript-fetch
+    - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    - cat .npmrc
+    - npm --no-git-tag-version version $CI_COMMIT_TAG
+    - npm publish
+  rules:
+    - !reference [ .release_rules_tag, rules ]
+
+# the pre-release is tagged "next"
+deploy-prerelease-typescript-fetch:
+  image: harbor.uni-muenster.de/proxy-docker/library/node:latest
+  stage: deploy
+  needs:
+    - build-typescript-fetch
+  script:
+    - cd $ARTIFACT_DIR/typescript-fetch
     - echo "${NPM_PREFIX}:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - cat .npmrc

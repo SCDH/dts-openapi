@@ -10,6 +10,6 @@ additionalProperties:
   apiPackage: dts-api
   modelPackage: dts-types
   withInterfaces: true
-  npmName: "@scdhapis/dts-api"
+  npmName: "@scdhapis/dts-api-axios"
   # set by `npm version` in CI/CD pipeline
   npmVersion: 0.0.0
