@@ -1,0 +1,9 @@
+{
+  "@context": "https://distributed-text-services.github.io/specifications/context/1.0rc1.json",
+  "dtsVersion": "1.0rc1",
+  "@id": "/api/dts/",
+  "@type": "EntryPoint",
+  "collection": "/api/dts/collection{/id,page,nav}.json",
+  "navigation" : "/api/dts/navigation/{?resource,ref,start,end,down,tree,page}",
+  "document": "/api/dts/document/{?resource,ref,start,end,tree,mediaType}"
+}
