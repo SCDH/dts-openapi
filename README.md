@@ -1,25 +1,30 @@
 # DTS OpenAPI Specs
 
-This project provides an OpenAPI specification for [Distributed Text
-Services
-(DTS)](https://distributed-text-services.github.io/specifications/). RESTful
-DTS make use of some very powerful techniques that can hardly be
-mastered with OpenAPI:
+This project provides building blocks for OpenAPI specifications for
+[Distributed Text Services
+DTS](https://distributed-text-services.github.io/specifications/).
+Yes, we concede: There's friction between OpenAPI and REST APIs. While
+OpenAPI specifications describes a priori, which endpoints are there,
+REST APIs allow much more adaptive interactions by using hypermedia
+controls. DTS is a RESTful API and thus makes use of some very
+powerful techniques that can hardly be mastered with OpenAPI:
 
-- the superb entry endpoint allows API endpoints to be spread over
-  multiple base URLs or to add other custom endpoints
+- the superb entry endpoint introduces discoverability: API endpoints
+  can be spread over multiple base URLs, even custom endpoints may be
+  added
 - the use of URI templates is only [partly
 supported](https://stackoverflow.com/questions/74577285/does-openapi-allow-using-rfc-6570-template-syntax-in-path-templates)
 by OpenAPI
 - DTS is designed upon the
   [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS), while
-  OpenAPI/SwaggerUI knows all URLs in advance
+  OpenAPI/SwaggerUI knows all endpoints in advance
 
 Nonetheless, OpenAPI specs for DTS are valuable because they enable
-developers to generate boilerplate client code or server stubs. The
-very fact of having data types generated for client or server is a
-clear profit. In order to cope with DTS's flexibility, the project
-splits the specs into several files for re-use and re-combination.
+software developers to generate server stubs and even parts of
+boilerplate client code. The very fact of having data types generated
+for client or server is a clear profit. In order to cope with DTS's
+flexibility, the project splits the specs into several files for
+re-use and re-combination. It offers bricks.
 
 - DTS Servers can fully use OpenAPI specs to describe their endpoints.
 - DTS Clients
@@ -108,6 +113,12 @@ docker run -v ${PWD}:/local openapitools/openapi-generator-cli batch /local/clie
 
 See [contributing](CONTRIBUTING.md) guide.
 
+## REST
+
+- REST APIs must be hypertext driven, by Roy Fielding,
+  https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
+- Martin Fowler about the "Richardson Maturity Model", https://martinfowler.com/articles/richardsonMaturityModel.html
+- OpenAPI (Swagger) vs. HATEOAS: https://www.baeldung.com/java-rest-swagger-vs-hateoas
 
 ## Further Reading
 
