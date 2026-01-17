@@ -20,11 +20,7 @@ paths:
         - $ref: 'params/navigation/query.yaml#/Page'
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Navigation'
+          $ref: '#/components/responses/NavigationOK'
         "5XX":
           description: Unexpected error
 
@@ -41,9 +37,7 @@ paths:
         - $ref: 'params/document/query.yaml#/MediaType'
       responses:
         "200":
-          description: OK
-          content:
-            '*/*'
+          $ref: '#/components/responses/DocumentOK'
         "5XX":
           description: Unexpected error
 
@@ -78,5 +72,13 @@ components:
       $ref: 'schemas/navigation.yaml#/components/schemas/Navigation'
     Pagination:
       $ref: 'schemas/pagination.yaml#/components/schemas/Pagination'
-
       
+  responses:
+    EntryOK:
+      $ref: 'schemas/responses.yaml#/components/responses/EntryOK'
+    CollectionOK:
+      $ref: 'schemas/responses.yaml#/components/responses/CollectionOK'
+    NavigationOK:
+      $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+    DocumentOK:
+      $ref: 'schemas/responses.yaml#/components/responses/DocumentOK'

@@ -20,7 +20,7 @@ variables:
       - SPEC:
           - dts-openapi.yaml
           - static-collection-openapi.yaml
-
+          - facade-openapi.yaml
       
 stages:
   - test
