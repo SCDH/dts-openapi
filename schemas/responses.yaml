@@ -25,7 +25,7 @@ components:
     DocumentOK:
       description: OK
       content:
-        */*:
+        "*/*":
           schema: {}
         # application/tei+xml:
         #   schema:
