@@ -29,23 +29,23 @@ paths:
         "200":
           $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
 
-  /navigation:
-    get:
-      operationId: navigation
-      summary: GET request on the navigation endpoint of the DTS API
-      parameters:
-        - $ref: 'params/navigation/query.yaml#/Resource'
-        - $ref: 'params/navigation/query.yaml#/Ref'
-        - $ref: 'params/navigation/query.yaml#/Start'
-        - $ref: 'params/navigation/query.yaml#/End'
-        - $ref: 'params/navigation/query.yaml#/Down'
-        - $ref: 'params/navigation/query.yaml#/Tree'
-        - $ref: 'params/navigation/query.yaml#/Page'
-      responses:
-        "200":
-          $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
-        "5XX":
-          description: Unexpected error
+  # /navigation:
+  #   get:
+  #     operationId: navigation
+  #     summary: GET request on the navigation endpoint of the DTS API
+  #     parameters:
+  #       - $ref: 'params/navigation/query.yaml#/Resource'
+  #       - $ref: 'params/navigation/query.yaml#/Ref'
+  #       - $ref: 'params/navigation/query.yaml#/Start'
+  #       - $ref: 'params/navigation/query.yaml#/End'
+  #       - $ref: 'params/navigation/query.yaml#/Down'
+  #       - $ref: 'params/navigation/query.yaml#/Tree'
+  #       - $ref: 'params/navigation/query.yaml#/Page'
+  #     responses:
+  #       "200":
+  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+  #       "5XX":
+  #         description: Unexpected error
 
   # /document:
   #   get:
