@@ -47,22 +47,22 @@ paths:
         "5XX":
           description: Unexpected error
 
-  /document:
-    get:
-      operationId: document
-      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
-      parameters:
-        - $ref: 'params/navigation/query.yaml#/Resource'
-        - $ref: 'params/navigation/query.yaml#/Ref'
-        - $ref: 'params/navigation/query.yaml#/Start'
-        - $ref: 'params/navigation/query.yaml#/End'
-        - $ref: 'params/navigation/query.yaml#/Tree'
-        - $ref: 'params/document/query.yaml#/MediaType'
-      responses:
-        "200":
-          $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
-        "5XX":
-          description: Unexpected error
+  # /document:
+  #   get:
+  #     operationId: document
+  #     summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+  #     parameters:
+  #       - $ref: 'params/navigation/query.yaml#/Resource'
+  #       - $ref: 'params/navigation/query.yaml#/Ref'
+  #       - $ref: 'params/navigation/query.yaml#/Start'
+  #       - $ref: 'params/navigation/query.yaml#/End'
+  #       - $ref: 'params/navigation/query.yaml#/Tree'
+  #       - $ref: 'params/document/query.yaml#/MediaType'
+  #     responses:
+  #       "200":
+  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+  #       "5XX":
+  #         description: Unexpected error
 
 # Used components must be imported here!
 components:
