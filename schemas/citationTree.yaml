@@ -1,0 +1,33 @@
+components:
+  schemas:
+    CitationTree:
+      type: object
+      required:
+        - '@type'
+      properties:
+        identifier:
+          type: string
+          description: The string identifier of the CitationTree.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “CitationTree”.
+        citeStructure:
+          type: array
+          item: '#components/schemas/CiteStructure'
+          description: An array of CiteStructure objects.
+        description:
+          type: string
+          description: A human readable description of the citation tree.
+    CiteStructure:
+      type: object
+      required:
+        - citeType
+      properties:
+        citeStructure:
+          type: array
+          item: '#components/schemas/CiteStructure'
+          description: An array of CiteStructure objects.
+        citeType:
+          type: string
+          description: A type of textual unit that appears at a given level in the citation tree. (E.g., 'chapter', 'verse')
+    

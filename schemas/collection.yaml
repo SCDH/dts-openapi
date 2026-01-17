@@ -9,6 +9,7 @@ components:
         - title
         - totalParents
         - totalChildren
+        - collection
       properties:
         "@context":
           type:
@@ -39,4 +40,37 @@ components:
             oneOf:
               - $ref: '#/components/schemas/Collection'
               - $ref: 'id.yaml#/components/schemas/Id'
-
+        dublinCore:
+          type:
+            $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+        extensions:
+          type:
+            $ref: 'any.yaml#/components/schemas/Any'
+        collection:
+          type: string
+          format: uri-template
+          description: Link to the Collection API endpoint for the Resource.
+          example: /collection/?id=01{$page,nav}/d.json
+        navigation:
+          type: string
+          format: uri-template
+          description: Link to the Navigation API endpoint for the Resource.
+          example: /navigation/?id=01{$ref,start,end,down,tree,page}/d.json
+        document:
+          type: string
+          format: uri-template
+          description: Link to the Document API endpoint for the Resource.
+          example: /navigation/?id=01{$ref,start,end,tree,mediaType}/d.json
+        download:
+          type:
+            $ref: 'download.yaml#/components/schemas/Download'
+          description: A link or a key-value list of media types and links to downloadable versions of the Resource
+        citationTrees:
+          type: array
+          items:
+            $ref: 'citationTree.yaml#/components/schemas/CitationTree'
+          description: 
+        view:
+          type:
+            $ref: 'pagination.yaml#/components/schemas/Pagination'
+          description: A Pagination object for paginated responses.

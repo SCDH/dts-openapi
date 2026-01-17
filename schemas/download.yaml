@@ -1,0 +1,7 @@
+components:
+  schemas:
+    Download:
+      anyOf:
+        - type: string
+        - type: array
+          items: string
