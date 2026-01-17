@@ -22,7 +22,7 @@ validate:
   image: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
   stage: test
   script:
-    - openapi-generator-cli validate -i *-openapi.yaml
+    - for spec in *-openapi.yaml; do openapi-generator-cli validate -i $spec; end
 
 generate:
   image: harbor.uni-muenster.de/proxy-docker/openapitools/openapi-generator-cli
