@@ -43,8 +43,3 @@ components:
           type:
             $ref: 'pagination.yaml#/components/schemas/Pagination'
           description: A Pagination object for paginated responses.
-
-    CitableUnit:
-      $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
-    Resource:
-      $ref: 'resource.yaml#/components/schemas/Resource'
