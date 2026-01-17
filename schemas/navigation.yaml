@@ -1,0 +1,45 @@
+components:
+  schemas:
+    Navigation:
+      description: Scheme for Navigation Endpoint Responses
+      type: object
+      required:
+        - '@id'
+        - '@type'
+        - dtsVersion
+        - resource
+      properties:
+        '@id':
+          type: string
+          description: The absolute URL of the current request including any query parameters.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be 'Navigation'.
+        dtsVersion:
+          type: string
+          description: The version of the DTS specification providing the response. Default is '1.0rc1'.
+        resource:
+          type:
+            $ref: 'resource.yaml#/components/schemas/Resource'
+          description: The Resource whose citation tree is being queried.
+        ref:
+          type:
+            $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
+          description: The CitableUnit in the citation tree which is being queried.
+        start:
+          type:
+            $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
+          description: The CitableUnit at the beginning of the range in the citation tree which is being queried.
+        end:
+          type:
+            $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
+          description: The CitableUnit at the end of the range in the citation tree which is being queried.
+        member:
+          type: array
+          item:
+            $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
+          description: An array of CitableUnit in the subtree specified by the query parameters.
+        view:
+          type:
+            $ref: 'pagination.yaml#/components/schemas/Pagination'
+          description: A Pagination object for paginated responses.

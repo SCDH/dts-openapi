@@ -1,0 +1,37 @@
+components:
+  schemas:
+    CitableUnit:
+      description: A portion of a Resource identified by a reference string.
+      type: object
+      required:
+        - identifier
+        - '@type'
+        - level
+        - parent
+      properties:
+        identifier:
+          type: string
+          description: The string identifier of the CitableUnit.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “CitableUnit”.
+        level:
+          type: integer
+          description: A number identifying the depth at which the CitableUnit is found within the citation tree of the Resource.
+        parent:
+          type: string
+          description: The string identifier of the hierarchical parent of the CitableUnit in the Resource.
+        '@id':
+          type: string
+          description: An optional URI identifier for the unit.
+        citeType:
+          type: string
+          description: The type of textual unit corresponding to the CitableUnit in the Resource. (E.g., “chapter”, “verse”)
+        dublinCore:
+          type:
+            $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+          description: Dublin Core Terms metadata describing the CitableUnit.
+        extensions:
+          type:
+            $ref: 'any.yaml#/components/schemas/Any'
+          description: Metadata for the CitableUnit from vocabularies other than Dublin Core Terms.
