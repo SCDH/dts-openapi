@@ -17,52 +17,52 @@ paths:
         "5XX":
           description: Unexpected error
 
-  # /collection/{id}/{page}/{nav}.json:
-  #   get:
-  #     operationId: collection
-  #     summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
-  #     parameters:
-  #       - $ref: 'params/collection/path.yaml#/Id'
-  #       - $ref: 'params/collection/path.yaml#/Page'
-  #       - $ref: 'params/collection/path.yaml#/Nav'
-  #     responses:
-  #       "200":
-  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+  /collection/{id}/{page}/{nav}.json:
+    get:
+      operationId: collection
+      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      parameters:
+        - $ref: 'params/collection/path.yaml#/Id'
+        - $ref: 'params/collection/path.yaml#/Page'
+        - $ref: 'params/collection/path.yaml#/Nav'
+      responses:
+        "200":
+          $ref: '#/components/responses/NavigationOK'
 
-  # /navigation:
-  #   get:
-  #     operationId: navigation
-  #     summary: GET request on the navigation endpoint of the DTS API
-  #     parameters:
-  #       - $ref: 'params/navigation/query.yaml#/Resource'
-  #       - $ref: 'params/navigation/query.yaml#/Ref'
-  #       - $ref: 'params/navigation/query.yaml#/Start'
-  #       - $ref: 'params/navigation/query.yaml#/End'
-  #       - $ref: 'params/navigation/query.yaml#/Down'
-  #       - $ref: 'params/navigation/query.yaml#/Tree'
-  #       - $ref: 'params/navigation/query.yaml#/Page'
-  #     responses:
-  #       "200":
-  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
-  #       "5XX":
-  #         description: Unexpected error
+  /navigation:
+    get:
+      operationId: navigation
+      summary: GET request on the navigation endpoint of the DTS API
+      parameters:
+        - $ref: 'params/navigation/query.yaml#/Resource'
+        - $ref: 'params/navigation/query.yaml#/Ref'
+        - $ref: 'params/navigation/query.yaml#/Start'
+        - $ref: 'params/navigation/query.yaml#/End'
+        - $ref: 'params/navigation/query.yaml#/Down'
+        - $ref: 'params/navigation/query.yaml#/Tree'
+        - $ref: 'params/navigation/query.yaml#/Page'
+      responses:
+        "200":
+          $ref: '#/components/responses/NavigationOK'
+        "5XX":
+          description: Unexpected error
 
-  # /document:
-  #   get:
-  #     operationId: document
-  #     summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
-  #     parameters:
-  #       - $ref: 'params/navigation/query.yaml#/Resource'
-  #       - $ref: 'params/navigation/query.yaml#/Ref'
-  #       - $ref: 'params/navigation/query.yaml#/Start'
-  #       - $ref: 'params/navigation/query.yaml#/End'
-  #       - $ref: 'params/navigation/query.yaml#/Tree'
-  #       - $ref: 'params/document/query.yaml#/MediaType'
-  #     responses:
-  #       "200":
-  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
-  #       "5XX":
-  #         description: Unexpected error
+  /document:
+    get:
+      operationId: document
+      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      parameters:
+        - $ref: 'params/navigation/query.yaml#/Resource'
+        - $ref: 'params/navigation/query.yaml#/Ref'
+        - $ref: 'params/navigation/query.yaml#/Start'
+        - $ref: 'params/navigation/query.yaml#/End'
+        - $ref: 'params/navigation/query.yaml#/Tree'
+        - $ref: 'params/document/query.yaml#/MediaType'
+      responses:
+        "200":
+          $ref: '#/components/responses/DocumentOK'
+        "5XX":
+          description: Unexpected error
 
 # Used components must be imported here!
 components:
@@ -101,3 +101,9 @@ components:
   responses:
     EntryOK:
       $ref: 'schemas/responses.yaml#/components/responses/EntryOK'
+    CollectionOK:
+      $ref: 'schemas/responses.yaml#/components/responses/CollectionOK'
+    NavigationOK:
+      $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+    DocumentOK:
+      $ref: 'schemas/responses.yaml#/components/responses/DocumentOK'
