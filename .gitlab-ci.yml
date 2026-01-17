@@ -14,6 +14,14 @@ variables:
     - if: $CI_COMMIT_TAG =~ /^\d+.\d+.\d+-rc/ # describe how your pre-release tags look like!
 
 
+.spec_matrix: &spec_matrix
+  parallel:
+    matrix:
+      - SPEC:
+          - dts-openapi.yaml
+          - static-collection-openapi.yaml
+
+      
 stages:
   - test
   - generate
@@ -22,8 +30,9 @@ stages:
 
 validate:
   stage: test
+  <<: *spec_matrix
   script:
-    - for spec in *-openapi.yaml; do openapi-generator-cli validate -i $spec; done
+    - openapi-generator-cli validate -i $SPEC
 
 generate:
   stage: generate
