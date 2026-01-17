@@ -1,41 +1,37 @@
 components:
   responses:
-
     EntryOK:
       description: OK
       content:
         application/json:
           schema:
             $ref: 'entry.yaml#/components/schemas/Entry'
-
     CollectionOK:
       description: OK
       content:
         application/json:
           schema:
             $ref: 'collection.yaml#/components/schemas/Collection'
-
     NavigationOK:
       description: OK
       content:
         application/json:
           schema:
             $ref: 'navigation.yaml#/components/schemas/Navigation'
-
     DocumentOK:
       description: OK
       content:
+        application/tei+xml:
+          schema:
+            type: string
+            format: binary
+        text/html:
+          schema:
+            type: string
+            format: binary
+        text/plain:
+          schema:
+            type: string
+            format: binary
         "*/*":
           schema: {}
-        # application/tei+xml:
-        #   schema:
-        #     type: string
-        #     format: binary
-        # text/html:
-        #   schema:
-        #     type: string
-        #     format: binary
-        # text/plain:
-        #   schema:
-        #     type: string
-        #     format: binary
