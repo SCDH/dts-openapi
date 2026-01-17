@@ -61,48 +61,6 @@ paths:
 components:
   schemas:
     Any:
-      $ref: 'schemas/any.yaml#/components/schemas/Any'
-    CitableUnit:
-      $ref: 'schemas/citableUnit.yaml#/components/schemas/CitableUnit'
-    CitationTree:
-      $ref: 'schemas/citationTree.yaml#/components/schemas/CitationTree'
-    CiteStructure:
-      $ref: 'schemas/citationTree.yaml#/components/schemas/CiteStructure'
-    Collection:
-      $ref: 'schemas/collection.yaml#/components/schemas/Collection'
-    LODContext:
-      $ref: 'schemas/context.yaml#/components/schemas/LODContext'
-    ContextUri:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextUri'
-    ContextObject:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextObject'
-    ContextArray:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextArray'
-    Download:
-      $ref: 'schemas/download.yaml#/components/schemas/Download'
-    DublinCore:
-      $ref: 'schemas/dublinCore.yaml#/components/schemas/DublinCore'
-    Entry:
-      $ref: 'schemas/entry.yaml#/components/schemas/Entry'
-    Id:
-      $ref: 'schemas/id.yaml#/components/schemas/Id'
-    Navigation:
-      $ref: 'schemas/navigation.yaml#/components/schemas/Navigation'
-    Pagination:
-      $ref: 'schemas/pagination.yaml#/components/schemas/Pagination'
-  responses:
-    EntryOK:
-      $ref: 'schemas/responses.yaml#/components/responses/EntryOK'
-    CollectionOK:
-      $ref: 'schemas/responses.yaml#/components/responses/CollectionOK'
-    NavigationOK:
-      $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
-    DocumentOK:
-      $ref: 'schemas/responses.yaml#/components/responses/DocumentOK'
----
-components:
-  schemas:
-    Any:
       nullable: true
       anyOf:
         - type: string
