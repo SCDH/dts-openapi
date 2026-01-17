@@ -13,7 +13,11 @@ paths:
       summary: GET request on the entry endpoint of the DTS API
       responses:
         "200":
-          $ref: '#/components/responses/EntryOK'
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
         "5XX":
           description: Unexpected error
 
