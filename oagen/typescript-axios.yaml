@@ -2,7 +2,7 @@
 
 # The /local absolute path is due to using docker! TODO!
 
-inputSpec: /local/static-collection-openapi.yaml
+inputSpec: /local/dts-openapi.yaml
 outputDir: /local/out/typescript-axios
 generatorName: typescript-axios
 additionalProperties:

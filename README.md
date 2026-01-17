@@ -56,7 +56,7 @@ Generating a typescript client based on Axios:
 docker run \
 	   -v ${PWD}:/local \
 	   openapitools/openapi-generator-cli generate \
-	   -i /local/static-collection-openapi.yaml \
+	   -i /local/dts-openapi.yaml \
 	   -g typescript-axios \
 	   -o /local/out/typescript-axios \
 	   --additional-properties=withSeparateModelsAndApi=true,apiPackage=dts-api,modelPackage=dts-types,withInterfaces=true,npmName="@scdhapis/dts-api"
