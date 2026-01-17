@@ -13,11 +13,7 @@ paths:
       summary: GET request on the entry endpoint of the DTS API
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Entry'
+          $ref: 'schemas/responses.yaml#/components/responses/EntryOK'
         "5XX":
           description: Unexpected error
 
@@ -31,11 +27,8 @@ paths:
         - $ref: 'params/collection/path.yaml#/Nav'
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Collection'
+          $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+
 
 
   /navigation:
@@ -52,11 +45,7 @@ paths:
         - $ref: 'params/navigation/query.yaml#/Page'
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Navigation'
+          $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
         "5XX":
           description: Unexpected error
 
@@ -73,12 +62,7 @@ paths:
         - $ref: 'params/document/query.yaml#/MediaType'
       responses:
         "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: string
-                format: binary
+          $ref: 'schemas/responses.yaml#/components/responses/DocumentOK'
         "5XX":
           description: Unexpected error
 
