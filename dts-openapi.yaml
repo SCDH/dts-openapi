@@ -13,11 +13,7 @@ paths:
       summary: GET request on the entry endpoint of the DTS API
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Entry'
+          $ref: '#/components/responses/EntryOK'
         "5XX":
           description: Unexpected error
 
@@ -101,3 +97,7 @@ components:
       $ref: 'schemas/navigation.yaml#/components/schemas/Navigation'
     Pagination:
       $ref: 'schemas/pagination.yaml#/components/schemas/Pagination'
+
+  responses:
+    EntryOK:
+      $ref: 'schemas/responses.yaml#/components/responses/EntryOK'
