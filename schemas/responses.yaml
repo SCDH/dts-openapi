@@ -25,15 +25,15 @@ components:
     DocumentOK:
       description: OK
       content:
-        "application/tei+xml":
+        application/tei+xml:
           schema:
             type: string
             format: binary
-        "text/html":
+        text/html:
           schema:
             type: string
             format: binary
-        "text/plain":
+        text/plain:
           schema:
             type: string
             format: binary
