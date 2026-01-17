@@ -17,17 +17,17 @@ paths:
         "5XX":
           description: Unexpected error
 
-  /collection/{id}/{page}/{nav}.json:
-    get:
-      operationId: collection
-      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
-      parameters:
-        - $ref: 'params/collection/path.yaml#/Id'
-        - $ref: 'params/collection/path.yaml#/Page'
-        - $ref: 'params/collection/path.yaml#/Nav'
-      responses:
-        "200":
-          $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
+  # /collection/{id}/{page}/{nav}.json:
+  #   get:
+  #     operationId: collection
+  #     summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+  #     parameters:
+  #       - $ref: 'params/collection/path.yaml#/Id'
+  #       - $ref: 'params/collection/path.yaml#/Page'
+  #       - $ref: 'params/collection/path.yaml#/Nav'
+  #     responses:
+  #       "200":
+  #         $ref: 'schemas/responses.yaml#/components/responses/NavigationOK'
 
   # /navigation:
   #   get:
