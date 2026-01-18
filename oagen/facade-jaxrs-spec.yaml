@@ -22,7 +22,7 @@ additionalProperties:
   modelPackage: de.ulbms.scdh.dts.facade.model
   groupId: de.ulbms.scdh.dts.facade
   artifactId: DTSFacadeAPI
-  artifactVersion: 0.0.0
+  artifactVersion: ${revision}${changelist}
   dateLibrary: java8
   interfaceOnly: true
   returnResponse: true

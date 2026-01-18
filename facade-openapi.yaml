@@ -49,9 +49,8 @@ components:
     ResourceMeta:
       name: collection
       in: path
-      description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates. 
+      description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates.
       required: true
       schema:
         type: string
         format: uri
-    
