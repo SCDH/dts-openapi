@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: DTS
-  description: Navigation and Document endpoints
+  title: DTS Facade
+  description: Navigation and Document endpoints on a stateless microservice
   version: 1.0rc1
 
 
@@ -9,7 +9,7 @@ paths:
   /navigation:
     get:
       operationId: navigation
-      summary: GET request on the navigation endpoint of the DTS API
+      summary: GET request on the navigation endpoint of the DTS API. In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
@@ -18,6 +18,7 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/DownQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/PageQ'
+        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
@@ -35,6 +36,7 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/document-query-params.yaml#/components/parameters/MediaTypeQ'
+        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -43,42 +45,13 @@ paths:
 
 # Used components must be imported here!
 components:
-  schemas:
-    Any:
-      $ref: 'components/any.yaml#/components/schemas/Any'
-    CitableUnit:
-      $ref: 'components/citableUnit.yaml#/components/schemas/CitableUnit'
-    CitationTree:
-      $ref: 'components/citationTree.yaml#/components/schemas/CitationTree'
-    CiteStructure:
-      $ref: 'components/citationTree.yaml#/components/schemas/CiteStructure'
-    LODContext:
-      $ref: 'components/context.yaml#/components/schemas/LODContext'
-    ContextUri:
-      $ref: 'components/context.yaml#/components/schemas/ContextUri'
-    ContextObject:
-      $ref: 'components/context.yaml#/components/schemas/ContextObject'
-    ContextArray:
-      $ref: 'components/context.yaml#/components/schemas/ContextArray'
-    Download:
-      $ref: 'components/download.yaml#/components/schemas/Download'
-    dublinCore:
-      $ref: 'components/dublinCore.yaml#/components/schemas/DublinCore'
-    Entry:
-      $ref: 'components/entry.yaml#/components/schemas/Entry'
-    Id:
-      $ref: 'components/id.yaml#/components/schemas/Id'
-    Navigation:
-      $ref: 'components/navigation.yaml#/components/schemas/Navigation'
-    Pagination:
-      $ref: 'components/pagination.yaml#/components/schemas/Pagination'
-      
-  responses:
-    EntryOK:
-      $ref: 'components/responses.yaml#/components/responses/EntryOK'
-    CollectionOK:
-      $ref: 'components/responses.yaml#/components/responses/CollectionOK'
-    NavigationOK:
-      $ref: 'components/responses.yaml#/components/responses/NavigationOK'
-    DocumentOK:
-      $ref: 'components/responses.yaml#/components/responses/DocumentOK'
+  parameters:
+    ResourceMeta:
+      name: collection
+      in: path
+      description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates. 
+      required: true
+      schema:
+        type: string
+        format: uri
+    
