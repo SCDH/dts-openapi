@@ -19,27 +19,22 @@ components:
           type: string
           description: The version of the DTS specification providing the response. Default is '1.0rc1'.
         resource:
-          type:
-            $ref: '#/components/schemas/Resource'
+          $ref: 'resource.yaml#/components/schemas/Resource'
           description: The Resource whose citation tree is being queried.
         ref:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
           description: The CitableUnit in the citation tree which is being queried.
         start:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
           description: The CitableUnit at the beginning of the range in the citation tree which is being queried.
         end:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
           description: The CitableUnit at the end of the range in the citation tree which is being queried.
         member:
           type: array
-          item:
-            $ref: '#/components/schemas/CitableUnit'
+          items:
+            $ref: 'citableUnit.yaml#/components/schemas/CitableUnit'
           description: An array of CitableUnit in the subtree specified by the query parameters.
         view:
-          type:
-            $ref: 'pagination.yaml#/components/schemas/Pagination'
+          $ref: 'pagination.yaml#/components/schemas/Pagination'
           description: A Pagination object for paginated responses.

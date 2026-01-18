@@ -28,10 +28,8 @@ components:
           type: string
           description: The type of textual unit corresponding to the CitableUnit in the Resource. (E.g., “chapter”, “verse”)
         dublinCore:
-          type:
-            $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+          $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
           description: Dublin Core Terms metadata describing the CitableUnit.
         extensions:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: Metadata for the CitableUnit from vocabularies other than Dublin Core Terms.

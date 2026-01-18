@@ -12,8 +12,7 @@ components:
         - collection
       properties:
         "@context":
-          type:
-            $ref: 'context.yaml#/components/schemas/LODContext'
+          $ref: 'context.yaml#/components/schemas/LODContext'
           description: The JSON-LD context.
         "@id":
           type: string
@@ -41,11 +40,11 @@ components:
               - $ref: '#/components/schemas/Collection'
               - $ref: 'id.yaml#/components/schemas/Id'
         dublinCore:
-          type:
-            $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+          $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+          description: Contains metadata following the Dublin Core Terms scheme.
         extensions:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
+          description: Contains any supplementary metadata following other schemes.
         collection:
           type: string
           format: uri-template
@@ -62,8 +61,7 @@ components:
           description: Link to the Document API endpoint for the Resource.
           example: /navigation/?id=01{$ref,start,end,tree,mediaType}/d.json
         download:
-          type:
-            $ref: 'download.yaml#/components/schemas/Download'
+          $ref: 'download.yaml#/components/schemas/Download'
           description: A link or a key-value list of media types and links to downloadable versions of the Resource
         citationTrees:
           type: array
@@ -71,6 +69,5 @@ components:
             $ref: 'citationTree.yaml#/components/schemas/CitationTree'
           description: 
         view:
-          type:
-            $ref: 'pagination.yaml#/components/schemas/Pagination'
+          $ref: 'pagination.yaml#/components/schemas/Pagination'
           description: A Pagination object for paginated responses.

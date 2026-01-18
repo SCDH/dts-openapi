@@ -13,7 +13,8 @@ components:
           description: The object’s RDF class which must be “CitationTree”.
         citeStructure:
           type: array
-          item: '#components/schemas/CiteStructure'
+          items:
+            $ref: '#/components/schemas/CiteStructure'
           description: An array of CiteStructure objects.
         description:
           type: string
@@ -25,7 +26,8 @@ components:
       properties:
         citeStructure:
           type: array
-          item: '#components/schemas/CiteStructure'
+          items:
+            $ref: '#/components/schemas/CiteStructure'
           description: An array of CiteStructure objects.
         citeType:
           type: string
