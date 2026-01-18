@@ -1,0 +1,470 @@
+openapi: 3.1.0
+info:
+  title: DTS
+  description: Navigation and Document endpoints
+  version: 1.0rc1
+paths:
+  /navigation:
+    get:
+      operationId: navigation
+      summary: GET request on the navigation endpoint of the DTS API
+      parameters:
+        - $ref: '#/components/parameters/ResourceQ'
+        - $ref: '#/components/parameters/RefQ'
+        - $ref: '#/components/parameters/StartQ'
+        - $ref: '#/components/parameters/EndQ'
+        - $ref: '#/components/parameters/DownQ'
+        - $ref: '#/components/parameters/TreeQ'
+        - $ref: '#/components/parameters/PageQ'
+      responses:
+        "200":
+          $ref: '#/components/responses/NavigationOK'
+        "5XX":
+          description: Unexpected error
+  /document:
+    get:
+      operationId: document
+      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      parameters:
+        - $ref: '#/components/parameters/Resource'
+        - $ref: '#/components/parameters/Ref'
+        - $ref: '#/components/parameters/Start'
+        - $ref: '#/components/parameters/End'
+        - $ref: '#/components/parameters/Tree'
+        - $ref: '#/components/parameters/MediaType'
+      responses:
+        "200":
+          $ref: '#/components/responses/DocumentOK'
+        "5XX":
+          description: Unexpected error
+# Used components must be imported here!
+components:
+  schemas:
+    Any:
+      nullable: true
+      anyOf:
+        - type: string
+        - type: number
+        - type: integer
+        - type: boolean
+        - type: array
+          items: {}
+        - type: object
+    CitableUnit:
+      description: A portion of a Resource identified by a reference string.
+      type: object
+      required:
+        - identifier
+        - '@type'
+        - level
+        - parent
+      properties:
+        identifier:
+          type: string
+          description: The string identifier of the CitableUnit.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “CitableUnit”.
+        level:
+          type: integer
+          description: A number identifying the depth at which the CitableUnit is found within the citation tree of the Resource.
+        parent:
+          type: string
+          description: The string identifier of the hierarchical parent of the CitableUnit in the Resource.
+        '@id':
+          type: string
+          description: An optional URI identifier for the unit.
+        citeType:
+          type: string
+          description: The type of textual unit corresponding to the CitableUnit in the Resource. (E.g., “chapter”, “verse”)
+        dublinCore:
+          type:
+            $ref: '#/components/schemas/DublinCore'
+          description: Dublin Core Terms metadata describing the CitableUnit.
+        extensions:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: Metadata for the CitableUnit from vocabularies other than Dublin Core Terms.
+    CitationTree:
+      type: object
+      required:
+        - '@type'
+      properties:
+        identifier:
+          type: string
+          description: The string identifier of the CitationTree.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “CitationTree”.
+        citeStructure:
+          type: array
+          item: '#components/schemas/CiteStructure'
+          description: An array of CiteStructure objects.
+        description:
+          type: string
+          description: A human readable description of the citation tree.
+    CiteStructure:
+      type: object
+      required:
+        - citeType
+      properties:
+        citeStructure:
+          type: array
+          item: '#components/schemas/CiteStructure'
+          description: An array of CiteStructure objects.
+        citeType:
+          type: string
+          description: A type of textual unit that appears at a given level in the citation tree. (E.g., 'chapter', 'verse')
+    Collection:
+      type: object
+      required:
+        - "@id"
+        - "@type"
+        - dtsVersion
+        - title
+        - totalParents
+        - totalChildren
+        - collection
+      properties:
+        "@context":
+          type:
+            $ref: '#/components/schemas/LODContext'
+          description: The JSON-LD context.
+        "@id":
+          type: string
+          description: The identifier of the Collection or Resource.
+        "@type":
+          type: string
+          description: The type. Collection or Resource.
+          enum: [Collection, Resource]
+        dtsVersion:
+          type: string
+          description: The version of the DTS specification providing the response.
+        title:
+          type: string
+          description: A name for the Collection or Resource. Additional names may be placed in dublinCore using title, e.g. for internationalization.
+        totalParents:
+          type: integer
+          description: Total number of parent Collections or Resources.
+        totalChildren:
+          type: integer
+          description: Total number of child Collections or Resources.
+        member:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Collection'
+              - $ref: '#/components/schemas/Id'
+        dublinCore:
+          type:
+            $ref: '#/components/schemas/DublinCore'
+        extensions:
+          type:
+            $ref: '#/components/schemas/Any'
+        collection:
+          type: string
+          format: uri-template
+          description: Link to the Collection API endpoint for the Resource.
+          example: /collection/?id=01{$page,nav}/d.json
+        navigation:
+          type: string
+          format: uri-template
+          description: Link to the Navigation API endpoint for the Resource.
+          example: /navigation/?id=01{$ref,start,end,down,tree,page}/d.json
+        document:
+          type: string
+          format: uri-template
+          description: Link to the Document API endpoint for the Resource.
+          example: /navigation/?id=01{$ref,start,end,tree,mediaType}/d.json
+        download:
+          type:
+            $ref: '#/components/schemas/Download'
+          description: A link or a key-value list of media types and links to downloadable versions of the Resource
+        citationTrees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CitationTree'
+          description:
+        view:
+          type:
+            $ref: '#/components/schemas/Pagination'
+          description: A Pagination object for paginated responses.
+    LODContext:
+      type:
+        oneOf:
+          - $ref: '#/components/schemas/ContextUri'
+          - $ref: '#/components/schemas/ContextObject'
+          - $ref: '#/components/schemas/ContextArray'
+      description: The JSON-LD context.
+    ContextUri:
+      type: string
+      description: A context URI
+    ContextObject:
+      type: object
+      description: An advanced JSON-LD context.
+    ContextArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/LODContext'
+      description: An advanced JSON-LD context.
+    Download:
+      type:
+        anyOf:
+          - type: string
+          - type: array
+            items: string
+    DublinCore:
+      type: object
+      properties:
+        creator:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: An entity responsible for making the resource.
+        created:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: Date of creation of the resource.
+        identifier:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: An unambiguous reference to the resource within a given context.
+        language:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: A language of the resource.
+        publisher:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: An entity responsible for making the resource available.
+        title:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: A name given to the resource.
+        type:
+          type:
+            $ref: '#/components/schemas/Any'
+          description: The nature or genre of the resource.
+    Entry:
+      type: object
+      required:
+        - "@id"
+        - "@type"
+        - dtsVersion
+        - collection
+        - navigation
+        - document
+      properties:
+        "@id":
+          type: string
+          description: The identifier of the API, generally its URL.
+        "@type":
+          type: string
+          description: Default Value. EntryPoint.
+        dtsVersion:
+          type: string
+          description: The version of the DTS specification providing the response.
+        collection:
+          type: string
+          format: uri-template
+          description: Link to the Collection API endpoint.
+          example: /collection/{?id,page,nav}/d.json
+        navigation:
+          type: string
+          format: uri-template
+          description: Link to the Navigation API endpoint.
+          example: https://generic-dts.example.com/dts/navigation/{?resource,ref,start,end,down,tree,page}
+        document:
+          type: string
+          format: uri-template
+          description: Link to the Document API endpoint.
+          example: https://generic-dts.example.com/dts/document/{?resource,ref,start,end,tree,mediaType}
+    Id:
+      type: string
+      description: Identifier of the resource or collection.
+    Navigation:
+      description: Scheme for Navigation Endpoint Responses
+      type: object
+      required:
+        - '@id'
+        - '@type'
+        - dtsVersion
+        - resource
+      properties:
+        '@id':
+          type: string
+          description: The absolute URL of the current request including any query parameters.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be 'Navigation'.
+        dtsVersion:
+          type: string
+          description: The version of the DTS specification providing the response. Default is '1.0rc1'.
+        resource:
+          type:
+            $ref: '#/components/schemas/Resource'
+          description: The Resource whose citation tree is being queried.
+        ref:
+          type:
+            $ref: '#/components/schemas/CitableUnit'
+          description: The CitableUnit in the citation tree which is being queried.
+        start:
+          type:
+            $ref: '#/components/schemas/CitableUnit'
+          description: The CitableUnit at the beginning of the range in the citation tree which is being queried.
+        end:
+          type:
+            $ref: '#/components/schemas/CitableUnit'
+          description: The CitableUnit at the end of the range in the citation tree which is being queried.
+        member:
+          type: array
+          item:
+            $ref: '#/components/schemas/CitableUnit'
+          description: An array of CitableUnit in the subtree specified by the query parameters.
+        view:
+          type:
+            $ref: '#/components/schemas/Pagination'
+          description: A Pagination object for paginated responses.
+    Pagination:
+      description: A Pagination object for paginated responses.
+      type: object
+      required:
+        - '@id'
+        - '@type'
+        - first
+        - previous
+        - next
+        - last
+      properties:
+        '@id':
+          type: string
+          description: The identifier of the current page of the collection. This should be the full URI for the current request including the pagination request parameter
+        '@type':
+          type: string
+          description: the type of the object. Must be Pagination
+        first:
+          type: string
+          description: The URI for the first page of the paginated result set
+        previous:
+          type: string
+          description: The URI for the previous page of the paginated result set
+        next:
+          type: string
+          description: The URI for the next page of the paginated result set
+        last:
+          type: string
+          description: The URI for the last page of the paginated result set
+  parameters:
+    Id:
+      name: id
+      in: path
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      in: path
+      description: Page of the current collection’s members
+      required: true
+      schema:
+        type: integer
+        default: 1
+    Nav:
+      name: nav
+      in: path
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [children, parents]
+        default: children
+    MediaTypeQ:
+      name: mediaType
+      in: query
+      description: The string identifier for the media-type the resource must be returned in
+      required: false
+      schema:
+        type: string
+    ResourceQ:
+      name: resource
+      in: query
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+    RefQ:
+      name: ref
+      in: query
+      description: The string identifier of a single node in the citation tree for the Resource, used as the point of reference for the query.
+      required: false
+      schema:
+        type: string
+    StartQ:
+      name: ref
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the starting point for a range that serves as the reference point for the query. This parameter is inclusive, so the starting point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+    EndQ:
+      name: ref
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the ending point for a range of passages that serves as the reference point for the query. This parameter is inclusive, so the supplied ending point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+    DownQ:
+      name: down
+      in: query
+      description: The maximum depth of the citation subtree to be returned, relative to the specified ref, the deeper of the start/end CitableUnit, or if these are not provided relative to the root. A value of -1 indicates the bottom of the Resource citation tree.
+      required: false
+      schema:
+        type: integer
+    TreeQ:
+      name: tree
+      in: query
+      description: The string identifier for a CitationTree of the Resource.
+      required: false
+      schema:
+        type: string
+    PageQ:
+      name: page
+      in: query
+      description: The number of identifying a page in paginated query results.
+      required: false
+      schema:
+        type: integer
+  responses:
+    EntryOK:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Entry'
+    CollectionOK:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Collection'
+    NavigationOK:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Navigation'
+    DocumentOK:
+      description: OK
+      content:
+        application/tei+xml:
+          schema:
+            type: string
+            format: binary
+        text/html:
+          schema:
+            type: string
+            format: binary
+        text/plain:
+          schema:
+            type: string
+            format: binary
