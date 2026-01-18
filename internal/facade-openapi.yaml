@@ -26,12 +26,12 @@ paths:
       operationId: document
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: '#/components/parameters/Resource'
-        - $ref: '#/components/parameters/Ref'
-        - $ref: '#/components/parameters/Start'
-        - $ref: '#/components/parameters/End'
-        - $ref: '#/components/parameters/Tree'
-        - $ref: '#/components/parameters/MediaType'
+        - $ref: '#/components/parameters/ResourceQ'
+        - $ref: '#/components/parameters/RefQ'
+        - $ref: '#/components/parameters/StartQ'
+        - $ref: '#/components/parameters/EndQ'
+        - $ref: '#/components/parameters/TreeQ'
+        - $ref: '#/components/parameters/MediaTypeQ'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'

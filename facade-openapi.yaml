@@ -29,12 +29,12 @@ paths:
       operationId: document
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/Resource'
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/Ref'
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/Start'
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/End'
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/Tree'
-        - $ref: 'components/document-query-params.yaml#/components/parameters/MediaType'
+        - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
+        - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
+        - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
+        - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
+        - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
+        - $ref: 'components/document-query-params.yaml#/components/parameters/MediaTypeQ'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
