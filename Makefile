@@ -10,12 +10,14 @@ SPECS_STANDALONE := $(patsubst %,standalone/%,$(SPECS))
 OAG_CONFIGS := $(wildcard oagen/*.yaml)
 OAG_TARGETS := $(patsubst oagen/%.yaml,out/%,$(OAG_CONFIGS))
 
+.PHONY: echo intern all clean
+
 echo:
 	echo "found specs: $(SPECS)"
 
 intern: standalone standalone/components.yaml $(SPECS_STANDALONE)
 
-all: standalone $(OAG_TARGETS)
+all: intern $(OAG_TARGETS)
 
 standalone/components.yaml: components/*.yaml
 	$(YQ_CMD) ea '. as $$item ireduce ({}; . * $$item )' $^ | \
@@ -25,7 +27,6 @@ standalone/%-openapi.yaml: %-openapi.yaml standalone/components.yaml
 	$(YQ_CMD) ea 'select(fileIndex==0).components = select(fileIndex==1).components | select(fileIndex==0)' $^  | \
 	sed s/''[a-zA-Z/-]*\.yaml#/''\#/g > $@
 
-.PHONY:
 standalone:
 	mkdir -p $@
 
