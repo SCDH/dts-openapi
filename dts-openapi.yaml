@@ -4,6 +4,7 @@ info:
   description: All DTS endpoints
   version: 1.0rc1
 
+# USE INTERNED SPEC FROM DIRECTORY internal INSTEAD!
 
 paths:
 
@@ -64,46 +65,3 @@ paths:
         "5XX":
           description: Unexpected error
 
-# Used components must be imported here!
-components:
-  schemas:
-    Any:
-      $ref: 'components/any.yaml#/components/schemas/Any'
-    CitableUnit:
-      $ref: 'components/citableUnit.yaml#/components/schemas/CitableUnit'
-    CitationTree:
-      $ref: 'components/citationTree.yaml#/components/schemas/CitationTree'
-    CiteStructure:
-      $ref: 'components/citationTree.yaml#/components/schemas/CiteStructure'
-    Collection:
-      $ref: 'components/collection.yaml#/components/schemas/Collection'
-    LODContext:
-      $ref: 'components/context.yaml#/components/schemas/LODContext'
-    ContextUri:
-      $ref: 'components/context.yaml#/components/schemas/ContextUri'
-    ContextObject:
-      $ref: 'components/context.yaml#/components/schemas/ContextObject'
-    ContextArray:
-      $ref: 'components/context.yaml#/components/schemas/ContextArray'
-    Download:
-      $ref: 'components/download.yaml#/components/schemas/Download'
-    DublinCore:
-      $ref: 'components/dublinCore.yaml#/components/schemas/DublinCore'
-    Entry:
-      $ref: 'components/entry.yaml#/components/schemas/Entry'
-    Id:
-      $ref: 'components/id.yaml#/components/schemas/Id'
-    Navigation:
-      $ref: 'components/navigation.yaml#/components/schemas/Navigation'
-    Pagination:
-      $ref: 'components/pagination.yaml#/components/schemas/Pagination'
-
-  responses:
-    EntryOK:
-      $ref: 'components/responses.yaml#/components/responses/EntryOK'
-    CollectionOK:
-      $ref: 'components/responses.yaml#/components/responses/CollectionOK'
-    NavigationOK:
-      $ref: 'components/responses.yaml#/components/responses/NavigationOK'
-    DocumentOK:
-      $ref: 'components/responses.yaml#/components/responses/DocumentOK'

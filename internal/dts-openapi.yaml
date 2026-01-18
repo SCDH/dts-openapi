@@ -3,6 +3,7 @@ info:
   title: DTS
   description: All DTS endpoints
   version: 1.0rc1
+# USE INTERNED SPEC FROM DIRECTORY internal INSTEAD 
 paths:
   /entry:
     get:
@@ -57,7 +58,6 @@ paths:
           $ref: '#/components/responses/DocumentOK'
         "5XX":
           description: Unexpected error
-# Used components must be imported here!
 components:
   schemas:
     Any:
