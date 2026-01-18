@@ -1,0 +1,35 @@
+components:
+  schemas:
+    Resource:
+      type: object
+      required:
+        - '@id'
+        - '@type'
+        - collection
+        - navigation
+        - document
+        - citationTrees
+      properties:
+        '@id':
+          type: string
+          description: The URI of the Resource.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “Resource”.
+        collection:
+          type: string
+          format: uri-template
+          description: The URI template to the Collection endpoint at which the Resource can be found.
+        navigation:
+          type: string
+          format: uri-template
+          description: The URI template to the Navigation API endpoint for the Resource.
+        document:
+          type: string
+          format: uri-template
+          description: The URI template to the Document API endpoint for the Resource.
+        citationTrees:
+          type: array
+          items:
+            $ref: 'citationTree.yaml#/components/schemas/CitationTree'
+          description: An array of CitationTree objects
