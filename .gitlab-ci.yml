@@ -21,7 +21,7 @@ variables:
           - dts-openapi.yaml
           - static-collection-openapi.yaml
           - facade-openapi.yaml
-      - DIR:
+        DIR:
           - .
           - internal
       
