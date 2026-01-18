@@ -21,6 +21,9 @@ variables:
           - dts-openapi.yaml
           - static-collection-openapi.yaml
           - facade-openapi.yaml
+      - DIR:
+          - .
+          - internal
       
 stages:
   - test
@@ -32,7 +35,7 @@ validate:
   stage: test
   <<: *spec_matrix
   script:
-    - openapi-generator-cli validate -i $SPEC
+    - openapi-generator-cli validate -i $DIR/$SPEC
 
 generate:
   stage: generate
