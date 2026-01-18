@@ -114,7 +114,7 @@ deploy-prerelease-npm:
           - facade-jaxrs-spec
 
 build-naven:
-  image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/eclipse-temurin:17-alpine
+  image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/maven:3.9-eclipse-temurin-17
   stage: build
   needs:
     - generate
