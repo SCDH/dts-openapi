@@ -98,12 +98,10 @@ components:
           type: string
           description: The type of textual unit corresponding to the CitableUnit in the Resource. (E.g., “chapter”, “verse”)
         dublinCore:
-          type:
-            $ref: '#/components/schemas/DublinCore'
+          $ref: '#/components/schemas/DublinCore'
           description: Dublin Core Terms metadata describing the CitableUnit.
         extensions:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: Metadata for the CitableUnit from vocabularies other than Dublin Core Terms.
     CitationTree:
       type: object
@@ -118,7 +116,8 @@ components:
           description: The object’s RDF class which must be “CitationTree”.
         citeStructure:
           type: array
-          item: '#components/schemas/CiteStructure'
+          items:
+            $ref: '#/components/schemas/CiteStructure'
           description: An array of CiteStructure objects.
         description:
           type: string
@@ -130,7 +129,8 @@ components:
       properties:
         citeStructure:
           type: array
-          item: '#components/schemas/CiteStructure'
+          items:
+            $ref: '#/components/schemas/CiteStructure'
           description: An array of CiteStructure objects.
         citeType:
           type: string
@@ -147,8 +147,7 @@ components:
         - collection
       properties:
         "@context":
-          type:
-            $ref: '#/components/schemas/LODContext'
+          $ref: '#/components/schemas/LODContext'
           description: The JSON-LD context.
         "@id":
           type: string
@@ -176,11 +175,11 @@ components:
               - $ref: '#/components/schemas/Collection'
               - $ref: '#/components/schemas/Id'
         dublinCore:
-          type:
-            $ref: '#/components/schemas/DublinCore'
+          $ref: '#/components/schemas/DublinCore'
+          description: Contains metadata following the Dublin Core Terms scheme.
         extensions:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
+          description: Contains any supplementary metadata following other schemes.
         collection:
           type: string
           format: uri-template
@@ -197,8 +196,7 @@ components:
           description: Link to the Document API endpoint for the Resource.
           example: /navigation/?id=01{$ref,start,end,tree,mediaType}/d.json
         download:
-          type:
-            $ref: '#/components/schemas/Download'
+          $ref: '#/components/schemas/Download'
           description: A link or a key-value list of media types and links to downloadable versions of the Resource
         citationTrees:
           type: array
@@ -206,8 +204,7 @@ components:
             $ref: '#/components/schemas/CitationTree'
           description:
         view:
-          type:
-            $ref: '#/components/schemas/Pagination'
+          $ref: '#/components/schemas/Pagination'
           description: A Pagination object for paginated responses.
     LODContext:
       type:
@@ -237,32 +234,25 @@ components:
       type: object
       properties:
         creator:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: An entity responsible for making the resource.
         created:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: Date of creation of the resource.
         identifier:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: An unambiguous reference to the resource within a given context.
         language:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: A language of the resource.
         publisher:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: An entity responsible for making the resource available.
         title:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: A name given to the resource.
         type:
-          type:
-            $ref: '#/components/schemas/Any'
+          $ref: '#/components/schemas/Any'
           description: The nature or genre of the resource.
     Entry:
       type: object
@@ -320,29 +310,24 @@ components:
           type: string
           description: The version of the DTS specification providing the response. Default is '1.0rc1'.
         resource:
-          type:
-            $ref: '#/components/schemas/Resource'
+          $ref: '#/components/schemas/Resource'
           description: The Resource whose citation tree is being queried.
         ref:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: '#/components/schemas/CitableUnit'
           description: The CitableUnit in the citation tree which is being queried.
         start:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: '#/components/schemas/CitableUnit'
           description: The CitableUnit at the beginning of the range in the citation tree which is being queried.
         end:
-          type:
-            $ref: '#/components/schemas/CitableUnit'
+          $ref: '#/components/schemas/CitableUnit'
           description: The CitableUnit at the end of the range in the citation tree which is being queried.
         member:
           type: array
-          item:
+          items:
             $ref: '#/components/schemas/CitableUnit'
           description: An array of CitableUnit in the subtree specified by the query parameters.
         view:
-          type:
-            $ref: '#/components/schemas/Pagination'
+          $ref: '#/components/schemas/Pagination'
           description: A Pagination object for paginated responses.
     Pagination:
       description: A Pagination object for paginated responses.
@@ -373,6 +358,39 @@ components:
         last:
           type: string
           description: The URI for the last page of the paginated result set
+    Resource:
+      type: object
+      required:
+        - '@id'
+        - '@type'
+        - collection
+        - navigation
+        - document
+        - citationTrees
+      properties:
+        '@id':
+          type: string
+          description: The URI of the Resource.
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “Resource”.
+        collection:
+          type: string
+          format: uri-template
+          description: The URI template to the Collection endpoint at which the Resource can be found.
+        navigation:
+          type: string
+          format: uri-template
+          description: The URI template to the Navigation API endpoint for the Resource.
+        document:
+          type: string
+          format: uri-template
+          description: The URI template to the Document API endpoint for the Resource.
+        citationTrees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CitationTree'
+          description: An array of CitationTree objects
   parameters:
     Id:
       name: id
