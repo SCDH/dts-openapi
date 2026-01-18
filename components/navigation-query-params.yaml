@@ -1,0 +1,57 @@
+components:
+  parameters:
+    ResourceQ:
+      name: resource
+      in: query
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+
+    RefQ:
+      name: ref
+      in: query
+      description: The string identifier of a single node in the citation tree for the Resource, used as the point of reference for the query.
+      required: false
+      schema:
+        type: string
+
+    StartQ:
+      name: start
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the starting point for a range that serves as the reference point for the query. This parameter is inclusive, so the starting point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+
+    EndQ:
+      name: end
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the ending point for a range of passages that serves as the reference point for the query. This parameter is inclusive, so the supplied ending point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+
+    DownQ:
+      name: down
+      in: query
+      description: The maximum depth of the citation subtree to be returned, relative to the specified ref, the deeper of the start/end CitableUnit, or if these are not provided relative to the root. A value of -1 indicates the bottom of the Resource citation tree.
+      required: false
+      schema:
+        type: integer
+
+    TreeQ:
+      name: tree
+      in: query
+      description: The string identifier for a CitationTree of the Resource.
+      required: false
+      schema:
+        type: string
+
+    PageQ:
+      name: page
+      in: query
+      description: The number of identifying a page in paginated query results.
+      required: false
+      schema:
+        type: integer

@@ -1,0 +1,29 @@
+components:
+  parameters:
+
+    Id:
+      name: id
+      in: path
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+
+    Page:
+      name: page
+      in: path
+      description: Page of the current collection’s members
+      required: true
+      schema:
+        type: integer
+        default: 1
+
+    Nav:
+      name: nav
+      in: path
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [ children, parents ]
+        default: children

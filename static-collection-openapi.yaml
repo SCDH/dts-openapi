@@ -25,9 +25,9 @@ paths:
       operationId: collection
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: 'params/collection/path.yaml#/Id'
-        - $ref: 'params/collection/path.yaml#/Page'
-        - $ref: 'params/collection/path.yaml#/Nav'
+        - $ref: 'components/collection-path-params.yaml#/components/parameters/Id'
+        - $ref: 'components/collection-path-params.yaml#/components/parameters/Page'
+        - $ref: 'components/collection-path-params.yaml#/components/parameters/Nav'
       responses:
         "200":
           description: OK
@@ -40,32 +40,32 @@ paths:
 components:
   schemas:
     Any:
-      $ref: 'schemas/any.yaml#/components/schemas/Any'
+      $ref: 'components/any.yaml#/components/schemas/Any'
     CitableUnit:
-      $ref: 'schemas/citableUnit.yaml#/components/schemas/CitableUnit'
+      $ref: 'components/citableUnit.yaml#/components/schemas/CitableUnit'
     CitationTree:
-      $ref: 'schemas/citationTree.yaml#/components/schemas/CitationTree'
+      $ref: 'components/citationTree.yaml#/components/schemas/CitationTree'
     CiteStructure:
-      $ref: 'schemas/citationTree.yaml#/components/schemas/CiteStructure'
+      $ref: 'components/citationTree.yaml#/components/schemas/CiteStructure'
     Collection:
-      $ref: 'schemas/collection.yaml#/components/schemas/Collection'
+      $ref: 'components/collection.yaml#/components/schemas/Collection'
     LODContext:
-      $ref: 'schemas/context.yaml#/components/schemas/LODContext'
+      $ref: 'components/context.yaml#/components/schemas/LODContext'
     ContextUri:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextUri'
+      $ref: 'components/context.yaml#/components/schemas/ContextUri'
     ContextObject:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextObject'
+      $ref: 'components/context.yaml#/components/schemas/ContextObject'
     ContextArray:
-      $ref: 'schemas/context.yaml#/components/schemas/ContextArray'
+      $ref: 'components/context.yaml#/components/schemas/ContextArray'
     Download:
-      $ref: 'schemas/download.yaml#/components/schemas/Download'
+      $ref: 'components/download.yaml#/components/schemas/Download'
     dublinCore:
-      $ref: 'schemas/dublinCore.yaml#/components/schemas/DublinCore'
+      $ref: 'components/dublinCore.yaml#/components/schemas/DublinCore'
     Entry:
-      $ref: 'schemas/entry.yaml#/components/schemas/Entry'
+      $ref: 'components/entry.yaml#/components/schemas/Entry'
     Id:
-      $ref: 'schemas/id.yaml#/components/schemas/Id'
+      $ref: 'components/id.yaml#/components/schemas/Id'
     Pagination:
-      $ref: 'schemas/pagination.yaml#/components/schemas/Pagination'
+      $ref: 'components/pagination.yaml#/components/schemas/Pagination'
 
       

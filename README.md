@@ -37,8 +37,60 @@ re-use and re-combination. It offers bricks.
 
 ## Getting Started
 
-The most straight forward way to run the [**OpenAPI Generator
-CLI**](https://openapi-generator.tech) is using the [Docker
+The following command updates all standalone specs and generates code
+for all OpenAPI generator configurations in the [`oagen`](oagen)
+directory. Generated code is written to the `out` folder.
+
+```shell
+make all
+```
+
+This runs the [**OpenAPI Generator
+CLI**](https://openapi-generator.tech) in the [Docker
+image](https://openapi-generator.tech/docs/installation#docker).is using
+
+
+For example, interfaces (types) for a typescript client are in
+`out/typescript-fetch/src/models/*.ts`:
+
+```shell
+$ tree out/typescript-fetch
+out/typescript-fetch
+├── docs
+│   ├── CitableUnit.md
+
+[...]
+
+│   └── Resource.md
+├── package.json
+├── README.md
+├── src
+│   ├── apis
+│   │   ├── DefaultApi.ts
+│   │   └── index.ts
+│   ├── index.ts
+│   ├── models
+│   │   ├── CitableUnit.ts
+│   │   ├── CitationTree.ts
+│   │   ├── CiteStructure.ts
+│   │   ├── CollectionMemberInner.ts
+│   │   ├── Collection.ts
+│   │   ├── DublinCore.ts
+│   │   ├── Entry.ts
+│   │   ├── index.ts
+│   │   ├── Navigation.ts
+│   │   ├── Pagination.ts
+│   │   └── Resource.ts
+│   └── runtime.ts
+└── tsconfig.json
+ 
+5 directories, 29 files
+```
+
+## Using docker
+
+If you want to use [**OpenAPI Generator
+CLI**](https://openapi-generator.tech) directly using [Docker
 image](https://openapi-generator.tech/docs/installation#docker):
 
 
@@ -56,56 +108,37 @@ Generating a typescript client based on Axios:
 docker run \
 	   -v ${PWD}:/local \
 	   openapitools/openapi-generator-cli generate \
-	   -i /local/dts-openapi.yaml \
+	   -i /local/internal/dts-openapi.yaml \
 	   -g typescript-axios \
 	   -o /local/out/typescript-axios \
-	   --additional-properties=withSeparateModelsAndApi=true,apiPackage=dts-api,modelPackage=dts-types,withInterfaces=true,npmName="@scdhapis/dts-api"
+	   --additional-properties=withSeparateModelsAndApi=true,apiPackage=dts-api,modelPackage=dts-types,withInterfaces=true,npmName="@scdhapis/dts-api",useSingleRequestParameter=true
 ```
 
-Types (interfaces) are in `out/typescript-axios/dts-types/*.ts`:
+## Standalone Specs
+
+The OpenAPI specs in the root directory of this repository include
+re-usable components in the [`components`](components) folder. Because
+including components is error-prone, we also provide generated
+standalone counterparts with components interned into to [`components`
+section](https://spec.openapis.org/oas/latest.html#components-object). These
+standalone counterparts live in the [`internal`](internal) folder. For
+generating code it's **recommended to use these standalone specs**.
+
+You should never edit the standalone specs directly. They are
+generated from the components and the specs in the base folder.
+
+The following command updates all standalone specs: 
 
 ```shell
-$ tree out/
-out
-└── typescript-axios
-    ├── api.ts
-    ├── base.ts
-    ├── common.ts
-    ├── configuration.ts
-    ├── docs
-    │   ├── Collection.md
-    │   ├── CollectionMemberInner.md
-    │   ├── DefaultApi.md
-    │   └── Entry.md
-    ├── dts-api
-    │   └── default-api.ts
-    ├── dts-types
-    │   ├── collection-member-inner.ts
-    │   ├── collection.ts
-    │   ├── entry.ts
-    │   └── index.ts
-    ├── git_push.sh
-    ├── index.ts
-    ├── package.json
-    ├── README.md
-    └── tsconfig.json
-
-5 directories, 18 files
+make all
 ```
-
-Use the `openapi-generator batch` command with config files under `oagen`:
-
-```shell
-docker run -v ${PWD}:/local openapitools/openapi-generator-cli batch /local/client-typescript.yaml --root-dir /local
-```
-
 
 ## Files and Directories
 
 - `*-openapi.yaml`: OpenAPI specs
-- `schemas/*.yaml`: OpenAPI schema specifications for re-use
-- `params/*.yaml`: OpenAPI parameter specifications for re-use
+- `components/*.yaml`: OpenAPI components: re-usable specifications for schema, parameters, etc.
 - `oagen/*.yaml`: config files for OpenAPI generator
+- `internal/*-openapi.yaml`: standalone specs derived from `*-openapi.yaml` files in the base directory
 
 
 

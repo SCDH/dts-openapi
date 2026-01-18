@@ -4,30 +4,23 @@ components:
       type: object
       properties:
         creator:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: An entity responsible for making the resource.
         created:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: Date of creation of the resource.
         identifier:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: An unambiguous reference to the resource within a given context.
         language:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: A language of the resource.
         publisher:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: An entity responsible for making the resource available.
         title:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: A name given to the resource.
         type:
-          type:
-            $ref: 'any.yaml#/components/schemas/Any'
+          $ref: 'any.yaml#/components/schemas/Any'
           description: The nature or genre of the resource.

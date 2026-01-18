@@ -1,0 +1,10 @@
+components:
+  parameters:
+
+    MediaTypeQ:
+      name: mediaType
+      in: query
+      description: The string identifier for the media-type the resource must be returned in
+      required: false
+      schema:
+        type: string
