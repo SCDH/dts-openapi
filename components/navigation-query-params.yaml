@@ -17,7 +17,7 @@ components:
         type: string
 
     StartQ:
-      name: ref
+      name: start
       in: query
       description: The string identifier of a node in the citation tree for the resource, used as the starting point for a range that serves as the reference point for the query. This parameter is inclusive, so the starting point is considered part of the specified range.
       required: false
@@ -25,7 +25,7 @@ components:
         type: string
 
     EndQ:
-      name: ref
+      name: end
       in: query
       description: The string identifier of a node in the citation tree for the resource, used as the ending point for a range of passages that serves as the reference point for the query. This parameter is inclusive, so the supplied ending point is considered part of the specified range.
       required: false
