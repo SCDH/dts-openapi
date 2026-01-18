@@ -3,7 +3,7 @@ info:
   title: DTS
   description: All DTS endpoints
   version: 1.0rc1
-# USE INTERNED SPEC FROM DIRECTORY internal INSTEAD 
+# USE INTERNED SPEC FROM DIRECTORY internal INSTEAD!
 paths:
   /entry:
     get:
