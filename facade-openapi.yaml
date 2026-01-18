@@ -21,7 +21,7 @@ paths:
         - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
-          $ref: '#/components/responses/NavigationOK'
+          $ref: 'components/responses.yaml#/components/responses/NavigationOK'
         "5XX":
           description: Unexpected error
 
@@ -39,7 +39,7 @@ paths:
         - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
-          $ref: '#/components/responses/DocumentOK'
+          $ref: 'components/responses.yaml#/components/responses/DocumentOK'
         "5XX":
           description: Unexpected error
 
