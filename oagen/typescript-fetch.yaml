@@ -6,7 +6,7 @@
 
 # The /local absolute path is due to using docker! TODO!
 
-inputSpec: /local/internal/dts-openapi.yaml
+inputSpec: /local/standalone/dts-openapi.yaml
 outputDir: /local/out/typescript-fetch
 generatorName: typescript-fetch
 additionalProperties:

@@ -23,7 +23,7 @@ variables:
           - facade-openapi.yaml
         DIR:
           - .
-          - internal
+          - standalone
       
 stages:
   - test

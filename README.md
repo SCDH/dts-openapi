@@ -37,9 +37,9 @@ re-use and re-combination. It offers bricks.
 
 ## Getting Started
 
-The following command updates all standalone specs and generates code
-for all OpenAPI generator configurations in the [`oagen`](oagen)
-directory. Generated code is written to the `out` folder.
+The following command generates code for all OpenAPI generator
+configurations in the [`oagen`](oagen) directory. Generated code is
+written to the `out` folder.
 
 ```shell
 make all
@@ -47,8 +47,8 @@ make all
 
 This runs the [**OpenAPI Generator
 CLI**](https://openapi-generator.tech) in the [Docker
-image](https://openapi-generator.tech/docs/installation#docker).is using
-
+image](https://openapi-generator.tech/docs/installation#docker). Generated
+code is written to the `out` folder.
 
 For example, interfaces (types) for a typescript client are in
 `out/typescript-fetch/src/models/*.ts`:
@@ -108,7 +108,7 @@ Generating a typescript client based on Axios:
 docker run \
 	   -v ${PWD}:/local \
 	   openapitools/openapi-generator-cli generate \
-	   -i /local/internal/dts-openapi.yaml \
+	   -i /local/standalone/dts-openapi.yaml \
 	   -g typescript-axios \
 	   -o /local/out/typescript-axios \
 	   --additional-properties=withSeparateModelsAndApi=true,apiPackage=dts-api,modelPackage=dts-types,withInterfaces=true,npmName="@scdhapis/dts-api",useSingleRequestParameter=true
@@ -121,7 +121,7 @@ re-usable components in the [`components`](components) folder. Because
 including components is error-prone, we also provide generated
 standalone counterparts with components interned into to [`components`
 section](https://spec.openapis.org/oas/latest.html#components-object). These
-standalone counterparts live in the [`internal`](internal) folder. For
+standalone counterparts live in the [`standalone`](standalone) folder. For
 generating code it's **recommended to use these standalone specs**.
 
 You should never edit the standalone specs directly. They are
@@ -130,7 +130,7 @@ generated from the components and the specs in the base folder.
 The following command updates all standalone specs: 
 
 ```shell
-make all
+make intern
 ```
 
 ## Files and Directories
@@ -138,7 +138,7 @@ make all
 - `*-openapi.yaml`: OpenAPI specs
 - `components/*.yaml`: OpenAPI components: re-usable specifications for schema, parameters, etc.
 - `oagen/*.yaml`: config files for OpenAPI generator
-- `internal/*-openapi.yaml`: standalone specs derived from `*-openapi.yaml` files in the base directory
+- `standalone/*-openapi.yaml`: standalone specs derived from `*-openapi.yaml` files in the base directory
 
 
 
