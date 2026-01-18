@@ -1,13 +1,13 @@
 openapi: 3.1.0
 info:
-  title: DTS
-  description: Navigation and Document endpoints
+  title: DTS Facade
+  description: Navigation and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
   /navigation:
     get:
       operationId: navigation
-      summary: GET request on the navigation endpoint of the DTS API
+      summary: GET request on the navigation endpoint of the DTS API. In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
         - $ref: '#/components/parameters/ResourceQ'
         - $ref: '#/components/parameters/RefQ'
@@ -16,6 +16,7 @@ paths:
         - $ref: '#/components/parameters/DownQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/PageQ'
+        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
@@ -32,6 +33,7 @@ paths:
         - $ref: '#/components/parameters/EndQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/MediaTypeQ'
+        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -39,6 +41,95 @@ paths:
           description: Unexpected error
 # Used components must be imported here!
 components:
+  parameters:
+    ResourceMeta:
+      name: collection
+      in: path
+      description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates.
+      required: true
+      schema:
+        type: string
+        format: uri
+    Id:
+      name: id
+      in: path
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      in: path
+      description: Page of the current collection’s members
+      required: true
+      schema:
+        type: integer
+        default: 1
+    Nav:
+      name: nav
+      in: path
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [children, parents]
+        default: children
+    MediaTypeQ:
+      name: mediaType
+      in: query
+      description: The string identifier for the media-type the resource must be returned in
+      required: false
+      schema:
+        type: string
+    ResourceQ:
+      name: resource
+      in: query
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+    RefQ:
+      name: ref
+      in: query
+      description: The string identifier of a single node in the citation tree for the Resource, used as the point of reference for the query.
+      required: false
+      schema:
+        type: string
+    StartQ:
+      name: start
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the starting point for a range that serves as the reference point for the query. This parameter is inclusive, so the starting point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+    EndQ:
+      name: end
+      in: query
+      description: The string identifier of a node in the citation tree for the resource, used as the ending point for a range of passages that serves as the reference point for the query. This parameter is inclusive, so the supplied ending point is considered part of the specified range.
+      required: false
+      schema:
+        type: string
+    DownQ:
+      name: down
+      in: query
+      description: The maximum depth of the citation subtree to be returned, relative to the specified ref, the deeper of the start/end CitableUnit, or if these are not provided relative to the root. A value of -1 indicates the bottom of the Resource citation tree.
+      required: false
+      schema:
+        type: integer
+    TreeQ:
+      name: tree
+      in: query
+      description: The string identifier for a CitationTree of the Resource.
+      required: false
+      schema:
+        type: string
+    PageQ:
+      name: page
+      in: query
+      description: The number of identifying a page in paginated query results.
+      required: false
+      schema:
+        type: integer
   schemas:
     Any:
       nullable: true
@@ -371,87 +462,6 @@ components:
           items:
             $ref: '#/components/schemas/CitationTree'
           description: An array of CitationTree objects
-  parameters:
-    Id:
-      name: id
-      in: path
-      description: Identifier for a collection or document.
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      in: path
-      description: Page of the current collection’s members
-      required: true
-      schema:
-        type: integer
-        default: 1
-    Nav:
-      name: nav
-      in: path
-      description: Determines whether the content of the member property represents parent or child items.
-      required: true
-      schema:
-        type: string
-        enum: [children, parents]
-        default: children
-    MediaTypeQ:
-      name: mediaType
-      in: query
-      description: The string identifier for the media-type the resource must be returned in
-      required: false
-      schema:
-        type: string
-    ResourceQ:
-      name: resource
-      in: query
-      description: The unique identifier for the Resource being navigated
-      required: true
-      schema:
-        type: string
-    RefQ:
-      name: ref
-      in: query
-      description: The string identifier of a single node in the citation tree for the Resource, used as the point of reference for the query.
-      required: false
-      schema:
-        type: string
-    StartQ:
-      name: start
-      in: query
-      description: The string identifier of a node in the citation tree for the resource, used as the starting point for a range that serves as the reference point for the query. This parameter is inclusive, so the starting point is considered part of the specified range.
-      required: false
-      schema:
-        type: string
-    EndQ:
-      name: end
-      in: query
-      description: The string identifier of a node in the citation tree for the resource, used as the ending point for a range of passages that serves as the reference point for the query. This parameter is inclusive, so the supplied ending point is considered part of the specified range.
-      required: false
-      schema:
-        type: string
-    DownQ:
-      name: down
-      in: query
-      description: The maximum depth of the citation subtree to be returned, relative to the specified ref, the deeper of the start/end CitableUnit, or if these are not provided relative to the root. A value of -1 indicates the bottom of the Resource citation tree.
-      required: false
-      schema:
-        type: integer
-    TreeQ:
-      name: tree
-      in: query
-      description: The string identifier for a CitationTree of the Resource.
-      required: false
-      schema:
-        type: string
-    PageQ:
-      name: page
-      in: query
-      description: The number of identifying a page in paginated query results.
-      required: false
-      schema:
-        type: integer
   responses:
     EntryOK:
       description: OK

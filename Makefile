@@ -21,11 +21,13 @@ all: intern $(OAG_TARGETS)
 
 standalone/components.yaml: components/*.yaml
 	$(YQ_CMD) ea '. as $$item ireduce ({}; . * $$item )' $^ | \
-	sed s/''[a-zA-Z/]*\.yaml#/''\#/g > $@
+	sed s/''[a-zA-Z/-]*\.yaml#/''\#/g > $@
+
 
 standalone/%-openapi.yaml: %-openapi.yaml standalone/components.yaml
-	$(YQ_CMD) ea 'select(fileIndex==0).components = select(fileIndex==1).components | select(fileIndex==0)' $^  | \
+	$(YQ_CMD) ea '. as $$item ireduce ({}; . * $$item )' $^  | \
 	sed s/''[a-zA-Z/-]*\.yaml#/''\#/g > $@
+# 'select(fileIndex==0).components = select(fileIndex==1).components | select(fileIndex==0)'
 
 standalone:
 	mkdir -p $@

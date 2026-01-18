@@ -4,6 +4,7 @@ info:
   description: Entry and Collection endpoints
   version: 1.0rc1
 
+# USE INTERNED SPEC FROM DIRECTORY standalone INSTEAD!
 
 paths:
   /entry:
@@ -16,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Entry'
+                $ref: 'components/entry.yaml#/components/schemas/Entry'
         "5XX":
           description: Unexpected error
 
@@ -34,38 +35,5 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Collection'
+                $ref: 'components/collection.yaml#/components/schemas/Collection'
 
-# Used components must be imported here!
-components:
-  schemas:
-    Any:
-      $ref: 'components/any.yaml#/components/schemas/Any'
-    CitableUnit:
-      $ref: 'components/citableUnit.yaml#/components/schemas/CitableUnit'
-    CitationTree:
-      $ref: 'components/citationTree.yaml#/components/schemas/CitationTree'
-    CiteStructure:
-      $ref: 'components/citationTree.yaml#/components/schemas/CiteStructure'
-    Collection:
-      $ref: 'components/collection.yaml#/components/schemas/Collection'
-    LODContext:
-      $ref: 'components/context.yaml#/components/schemas/LODContext'
-    ContextUri:
-      $ref: 'components/context.yaml#/components/schemas/ContextUri'
-    ContextObject:
-      $ref: 'components/context.yaml#/components/schemas/ContextObject'
-    ContextArray:
-      $ref: 'components/context.yaml#/components/schemas/ContextArray'
-    Download:
-      $ref: 'components/download.yaml#/components/schemas/Download'
-    dublinCore:
-      $ref: 'components/dublinCore.yaml#/components/schemas/DublinCore'
-    Entry:
-      $ref: 'components/entry.yaml#/components/schemas/Entry'
-    Id:
-      $ref: 'components/id.yaml#/components/schemas/Id'
-    Pagination:
-      $ref: 'components/pagination.yaml#/components/schemas/Pagination'
-
-      

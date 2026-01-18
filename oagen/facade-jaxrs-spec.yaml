@@ -1,0 +1,29 @@
+# see https://openapi-generator.tech/docs/generators/jaxrs-spec/
+
+# This is used to generate Quarkus server stubs.
+
+# Quarkus uses mircoprofile annotations instead of swagger annots.
+
+# The /local absolute path is due to using docker! TODO!
+
+inputSpec: /local/standalone/facade-openapi.yaml
+outputDir: /local/out/facade-jaxrs-spec
+generatorName: jaxrs-spec
+generateAliasAsModel: true
+modelTests: false
+apiTests: false
+apiDocs: false
+supportingFiles: false
+additionalProperties:
+  library: quarkus
+  useSwaggerAnnotations: false
+  useMicroProfileOpenAPIAnnotations: true
+  apiPackage: de.ulbms.scdh.dts.facade.api
+  modelPackage: de.ulbms.scdh.dts.facade.model
+  groupId: de.ulbms.scdh.dts.facade
+  artifactId: DTSFacadeAPI
+  artifactVersion: 0.0.0
+  dateLibrary: java8
+  interfaceOnly: true
+  returnResponse: true
+  useJakartaEe: true
