@@ -20,6 +20,10 @@ paths:
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
   /document:
@@ -37,6 +41,10 @@ paths:
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
 # Used components must be imported here!
@@ -466,19 +474,19 @@ components:
     EntryOK:
       description: OK
       content:
-        application/json:
+        application/ld+json:
           schema:
             $ref: '#/components/schemas/Entry'
     CollectionOK:
       description: OK
       content:
-        application/json:
+        application/ld+json:
           schema:
             $ref: '#/components/schemas/Collection'
     NavigationOK:
       description: OK
       content:
-        application/json:
+        application/ld+json:
           schema:
             $ref: '#/components/schemas/Navigation'
     DocumentOK:
@@ -493,6 +501,46 @@ components:
             type: string
             format: binary
         text/plain:
+          schema:
+            type: string
+            format: binary
+      headers:
+        Link:
+          description: Link SHOULD contain a URI that links back to the Collection endpoint for the requested Resource.
+          schema:
+            type: string
+            format: uri
+    BadRequest:
+      description: Bad Request
+      content:
+        text/plain:
+          schema:
+            type: string
+        application/ld+json:
+          schema:
+            type: string
+        application/tei+xml:
+          schema:
+            type: string
+            format: binary
+        text/html:
+          schema:
+            type: string
+            format: binary
+    NotFound:
+      description: Not Found
+      content:
+        text/plain:
+          schema:
+            type: string
+        application/ld+json:
+          schema:
+            type: string
+        application/tei+xml:
+          schema:
+            type: string
+            format: binary
+        text/html:
           schema:
             type: string
             format: binary

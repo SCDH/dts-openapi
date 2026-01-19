@@ -22,6 +22,10 @@ paths:
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/NavigationOK'
+        "400":
+          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+        "404":
+          $ref: 'components/responses.yaml#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
 
@@ -40,6 +44,10 @@ paths:
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/DocumentOK'
+        "400":
+          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+        "404":
+          $ref: 'components/responses.yaml#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
 

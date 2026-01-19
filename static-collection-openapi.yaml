@@ -13,11 +13,7 @@ paths:
       summary: GET request on the entry endpoint of the DTS API
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: 'components/entry.yaml#/components/schemas/Entry'
+          $ref: 'components/responses.yaml#/components/responses/EntryOK'
         "5XX":
           description: Unexpected error
 
@@ -31,9 +27,11 @@ paths:
         - $ref: 'components/collection-path-params.yaml#/components/parameters/Nav'
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: 'components/collection.yaml#/components/schemas/Collection'
+          $ref: 'components/responses.yaml#/components/responses/NavigationOK'
+        "400":
+          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+        "404":
+          $ref: 'components/responses.yaml#/components/responses/NotFound'
+        "5XX":
+          description: Unexpected error
 
