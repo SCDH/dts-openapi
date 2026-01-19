@@ -23,6 +23,7 @@ additionalProperties:
   groupId: de.ulbms.scdh.dts.facade
   artifactId: DTSFacadeAPI
   artifactVersion: ${revision}${changelist}
+  title: DTS Facade API
   dateLibrary: java8
   interfaceOnly: true
   returnResponse: true
