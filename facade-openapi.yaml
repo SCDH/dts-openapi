@@ -11,6 +11,7 @@ paths:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API. In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
+        - $ref: '#/components/parameters/ResourceMeta'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
@@ -18,7 +19,6 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/DownQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/PageQ'
-        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/NavigationOK'
@@ -34,13 +34,13 @@ paths:
       operationId: document
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
+        - $ref: '#/components/parameters/ResourceMeta'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/document-query-params.yaml#/components/parameters/MediaTypeQ'
-        - $ref: '#/components/parameters/ResourceMeta'
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/DocumentOK'
@@ -56,7 +56,7 @@ components:
   parameters:
     ResourceMeta:
       name: collection
-      in: path
+      in: query
       description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates.
       required: true
       schema:
