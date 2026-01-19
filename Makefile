@@ -33,7 +33,7 @@ standalone:
 	mkdir -p $@
 
 # generates code for every config file in oagen to out
-out/%: oagen/%.yaml
+out/%: oagen/%.yaml $(SPECS_STANDALONE)
 	$(OAG_CMD) batch $(OAG_MNT)/$< --root-dir /local --verbose --clean
 
 # legacy, but may be useful for diagnostics
