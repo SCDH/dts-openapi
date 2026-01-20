@@ -113,15 +113,15 @@ deploy-prerelease-npm:
       - PKG:
           - facade-jaxrs-spec
 
-# build-naven:
-#   image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/maven:3.9-eclipse-temurin-17
-#   stage: build
-#   needs:
-#     - generate
-#   <<: *maven_matrix
-#   script:
-#     - cd $ARTIFACT_DIR/$PKG
-#     - mvn -Drevision="0.0.0" -Dchangelist="" package
+build-naven:
+  image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/maven:3.9-eclipse-temurin-17
+  stage: build
+  needs:
+    - generate
+  <<: *maven_matrix
+  script:
+    - cd $ARTIFACT_DIR/$PKG
+    - mvn -Drevision="0.0.0" -Dchangelist="" package
 
 
 generic-package:
