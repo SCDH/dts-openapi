@@ -214,6 +214,9 @@ components:
         citeType:
           type: string
           description: A type of textual unit that appears at a given level in the citation tree. (E.g., 'chapter', 'verse')
+        '@type':
+          type: string
+          description: The object’s RDF class which must be “CiteStructure”.
     Collection:
       type: object
       required:
