@@ -382,6 +382,9 @@ components:
         - dtsVersion
         - resource
       properties:
+        '@context':
+          type: object
+          description: JSON-LD context
         '@id':
           type: string
           description: The absolute URL of the current request including any query parameters.
