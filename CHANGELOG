@@ -1,11 +1,16 @@
 # Changes
 
+## 0.0.3
+
+- adds free-form @context property to `Navigation` object
+- adds @type property to `CiteStructure` object
+
 ## 0.0.1
 
-- follows the 1.0rc1 specs of DTS	
-	
+- follows the 1.0rc1 specs of DTS
+
 ## 0.0.1-rc10
 
-- follows the 1.0rc1 specs of DTS 
+- follows the 1.0rc1 specs of DTS
 - entry endpoint
 - collection endpoint
