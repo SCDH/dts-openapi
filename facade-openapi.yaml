@@ -64,6 +64,8 @@ components:
       style: deepObject
       schema:
         type: object
+        additionalProperties:
+          type: string
     FollowUpContext:
       name: cf
       in: query
@@ -72,3 +74,5 @@ components:
       style: deepObject
       schema:
         type: object
+        additionalProperties:
+          type: string
