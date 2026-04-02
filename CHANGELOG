@@ -1,5 +1,9 @@
 # Changes
 
+## 0.1.1
+
+- make `cf` and `cf` objects map to `Map<String, String>` hash map
+
 ## 0.1.0
 
 - introduces deep objects `cf` and `cr` to the DTS facade for passing around resources and followup information.
