@@ -9,7 +9,6 @@ paths:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API. In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
-        - $ref: '#/components/parameters/ResourceMeta'
         - $ref: '#/components/parameters/ResourceQ'
         - $ref: '#/components/parameters/RefQ'
         - $ref: '#/components/parameters/StartQ'
@@ -17,6 +16,8 @@ paths:
         - $ref: '#/components/parameters/DownQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/PageQ'
+        - $ref: '#/components/parameters/ResourceContext'
+        - $ref: '#/components/parameters/FollowUpContext'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
@@ -31,13 +32,14 @@ paths:
       operationId: document
       summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: '#/components/parameters/ResourceMeta'
         - $ref: '#/components/parameters/ResourceQ'
         - $ref: '#/components/parameters/RefQ'
         - $ref: '#/components/parameters/StartQ'
         - $ref: '#/components/parameters/EndQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/MediaTypeQ'
+        - $ref: '#/components/parameters/ResourceContext'
+        - $ref: '#/components/parameters/FollowUpContext'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -50,14 +52,22 @@ paths:
 # Used components must be imported here!
 components:
   parameters:
-    ResourceMeta:
-      name: collection
+    ResourceContext:
+      name: cr
       in: query
-      description: The URI to the Collection endpoint at which metadata about the Resource can be found. This must be passed in, because there's no way to store it in the DTS facade. But, it can simple be made a part of the URI templates.
-      required: true
+      description: The context of the resources. Used for fetching resources.
+      required: false
+      style: deepObject
       schema:
-        type: string
-        format: uri
+        type: object
+    FollowUpContext:
+      name: cf
+      in: query
+      description: The context of the DTS API. Used for providing missing information for follow up links.
+      required: false
+      style: deepObject
+      schema:
+        type: object
     Id:
       name: id
       in: path
