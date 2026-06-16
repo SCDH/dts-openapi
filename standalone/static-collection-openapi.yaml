@@ -395,6 +395,30 @@ components:
         type: string
         enum: [children, parents]
         default: children
+    IdQ:
+      name: id
+      in: query
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+    PageQ:
+      name: page
+      in: query
+      description: The number of identifying a page in paginated query results.
+      required: false
+      schema:
+        type: integer
+        default: 1
+    NavQ:
+      name: nav
+      in: query
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [children, parents]
+        default: children
     MediaTypeQ:
       name: mediaType
       in: query
@@ -444,13 +468,6 @@ components:
       required: false
       schema:
         type: string
-    PageQ:
-      name: page
-      in: query
-      description: The number of identifying a page in paginated query results.
-      required: false
-      schema:
-        type: integer
   responses:
     EntryOK:
       description: OK

@@ -1,13 +1,34 @@
 openapi: 3.1.0
 info:
   title: DTS Facade
-  description: Navigation and Document endpoints on a stateless microservice
+  description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
+  /collection:
+    get:
+      operationId: collection
+      summary: GET request on the collection endpoint of the DTS API.
+      description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      parameters:
+        - $ref: '#/components/parameters/IdQ'
+        - $ref: '#/components/parameters/PageQ'
+        - $ref: '#/components/parameters/NavQ'
+        - $ref: '#/components/parameters/ResourceContext'
+        - $ref: '#/components/parameters/FollowUpContext'
+      responses:
+        "200":
+          $ref: '#/components/responses/CollectionOK'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "5XX":
+          description: Unexpected error
   /navigation:
     get:
       operationId: navigation
-      summary: GET request on the navigation endpoint of the DTS API. In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
+      summary: GET request on the navigation endpoint of the DTS API.
+      description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
         - $ref: '#/components/parameters/ResourceQ'
         - $ref: '#/components/parameters/RefQ'
@@ -30,7 +51,8 @@ paths:
   /document:
     get:
       operationId: document
-      summary: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
+      summary: GET request on the document endpoint of the DTS API.
+      description: The Document endpoint is used to access the content of document, as opposed to metadata (which is found in collections).
       parameters:
         - $ref: '#/components/parameters/ResourceQ'
         - $ref: '#/components/parameters/RefQ'
@@ -96,6 +118,30 @@ components:
         type: string
         enum: [children, parents]
         default: children
+    IdQ:
+      name: id
+      in: query
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+    PageQ:
+      name: page
+      in: query
+      description: The number of identifying a page in paginated query results.
+      required: false
+      schema:
+        type: integer
+        default: 1
+    NavQ:
+      name: nav
+      in: query
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [children, parents]
+        default: children
     MediaTypeQ:
       name: mediaType
       in: query
@@ -145,13 +191,6 @@ components:
       required: false
       schema:
         type: string
-    PageQ:
-      name: page
-      in: query
-      description: The number of identifying a page in paginated query results.
-      required: false
-      schema:
-        type: integer
   schemas:
     Any:
       nullable: true
