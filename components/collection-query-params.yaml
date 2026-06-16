@@ -1,0 +1,29 @@
+components:
+  parameters:
+
+    IdQ:
+      name: id
+      in: query
+      description: Identifier for a collection or document.
+      required: true
+      schema:
+        type: string
+
+    PageQ:
+      name: page
+      in: query
+      description: Page of the current collection’s members
+      required: true
+      schema:
+        type: integer
+        default: 1
+
+    NavQ:
+      name: nav
+      in: query
+      description: Determines whether the content of the member property represents parent or child items.
+      required: true
+      schema:
+        type: string
+        enum: [ children, parents ]
+        default: children
