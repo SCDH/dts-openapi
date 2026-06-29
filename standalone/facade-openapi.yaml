@@ -39,6 +39,7 @@ paths:
         - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
@@ -62,6 +63,7 @@ paths:
         - $ref: '#/components/parameters/MediaTypeQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -80,6 +82,7 @@ components:
       description: The context of the resources. Used for fetching resources.
       required: false
       style: deepObject
+      explode: true
       schema:
         type: object
         additionalProperties:
@@ -94,6 +97,15 @@ components:
         type: object
         additionalProperties:
           type: string
+    DirectResource:
+      name: direct
+      in: query
+      description: Whether to get the resource directly by id (= relative path) instead of looking the location up in the collection metadata.
+      schema:
+        type: boolean
+        default: false
+      required: false
+      allowEmptyValue: true
     Id:
       name: id
       in: path
