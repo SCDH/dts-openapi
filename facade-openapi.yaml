@@ -47,19 +47,19 @@ paths:
         "200":
           $ref: 'components/responses.yaml#/components/responses/NavigationOK'
         "400":
-          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+          $ref: 'components/responses.yaml#/components/responses/LODBadRequest'
         "404":
-          $ref: 'components/responses.yaml#/components/responses/NotFound'
+          $ref: 'components/responses.yaml#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
 
-  /document:
+  /document/{resource}:
     get:
       operationId: document
       summary: GET request on the document endpoint of the DTS API.
       description: The Document endpoint is used to access the content of document, as opposed to metadata (which is found in collections).
       parameters:
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
+        - $ref: 'components/navigation-path-params.yaml#/components/parameters/Resource'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
