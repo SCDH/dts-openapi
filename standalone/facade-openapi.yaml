@@ -24,13 +24,13 @@ paths:
           $ref: '#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
-  /navigation:
+  /navigation/{resource}:
     get:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API.
       description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
-        - $ref: '#/components/parameters/ResourceQ'
+        - $ref: '#/components/parameters/Resource'
         - $ref: '#/components/parameters/RefQ'
         - $ref: '#/components/parameters/StartQ'
         - $ref: '#/components/parameters/EndQ'
@@ -165,6 +165,14 @@ components:
       required: false
       schema:
         type: string
+    Resource:
+      name: resource
+      in: path
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+        format: uri
     ResourceQ:
       name: resource
       in: query

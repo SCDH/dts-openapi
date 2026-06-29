@@ -1,0 +1,11 @@
+components:
+  parameters:
+    Resource:
+      name: resource
+      in: path
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+        format: uri
+

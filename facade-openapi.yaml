@@ -27,13 +27,13 @@ paths:
         "5XX":
           description: Unexpected error
 
-  /navigation:
+  /navigation/{resource}:
     get:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API.
       description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
+        - $ref: 'components/navigation-path-params.yaml#/components/parameters/Resource'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
