@@ -19,9 +19,9 @@ paths:
         "200":
           $ref: '#/components/responses/CollectionOK'
         "400":
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/LODBadRequest'
         "404":
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
   /navigation/{resource}:
@@ -627,3 +627,15 @@ components:
           schema:
             type: string
             format: binary
+    LODBadRequest:
+      description: Bad Request
+      content:
+        application/ld+json:
+          schema:
+            type: string
+    LODNotFound:
+      description: Not Found
+      content:
+        application/ld+json:
+          schema:
+            type: string

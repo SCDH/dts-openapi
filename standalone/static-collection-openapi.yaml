@@ -554,3 +554,15 @@ components:
           schema:
             type: string
             format: binary
+    LODBadRequest:
+      description: Bad Request
+      content:
+        application/ld+json:
+          schema:
+            type: string
+    LODNotFound:
+      description: Not Found
+      content:
+        application/ld+json:
+          schema:
+            type: string
