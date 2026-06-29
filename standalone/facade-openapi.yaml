@@ -113,6 +113,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     Page:
       name: page
       in: path
@@ -137,6 +139,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     PageQ:
       name: page
       in: query
