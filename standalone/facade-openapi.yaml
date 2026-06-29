@@ -4,13 +4,13 @@ info:
   description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
-  /collection:
+  /collection/{id}:
     get:
       operationId: collection
       summary: GET request on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: '#/components/parameters/IdQ'
+        - $ref: '#/components/parameters/Id'
         - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/NavQ'
         - $ref: '#/components/parameters/ResourceContext'
