@@ -378,6 +378,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     Page:
       name: page
       in: path
@@ -402,6 +404,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     PageQ:
       name: page
       in: query
@@ -426,6 +430,14 @@ components:
       required: false
       schema:
         type: string
+    Resource:
+      name: resource
+      in: path
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+        format: uri
     ResourceQ:
       name: resource
       in: query
@@ -542,3 +554,15 @@ components:
           schema:
             type: string
             format: binary
+    LODBadRequest:
+      description: Bad Request
+      content:
+        application/ld+json:
+          schema:
+            type: string
+    LODNotFound:
+      description: Not Found
+      content:
+        application/ld+json:
+          schema:
+            type: string

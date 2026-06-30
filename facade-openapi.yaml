@@ -6,13 +6,13 @@ info:
 
 
 paths:
-  /collection:
+  /collection/{id}:
     get:
       operationId: collection
       summary: GET request on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: 'components/collection-query-params.yaml#/components/parameters/IdQ'
+        - $ref: 'components/collection-path-params.yaml#/components/parameters/Id'
         - $ref: 'components/collection-query-params.yaml#/components/parameters/PageQ'
         - $ref: 'components/collection-query-params.yaml#/components/parameters/NavQ'
         - $ref: '#/components/parameters/ResourceContext'
@@ -21,19 +21,19 @@ paths:
         "200":
           $ref: 'components/responses.yaml#/components/responses/CollectionOK'
         "400":
-          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+          $ref: 'components/responses.yaml#/components/responses/LODBadRequest'
         "404":
-          $ref: 'components/responses.yaml#/components/responses/NotFound'
+          $ref: 'components/responses.yaml#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
 
-  /navigation:
+  /navigation/{resource}:
     get:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API.
       description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
+        - $ref: 'components/navigation-path-params.yaml#/components/parameters/Resource'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
@@ -42,23 +42,24 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/PageQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/NavigationOK'
         "400":
-          $ref: 'components/responses.yaml#/components/responses/BadRequest'
+          $ref: 'components/responses.yaml#/components/responses/LODBadRequest'
         "404":
-          $ref: 'components/responses.yaml#/components/responses/NotFound'
+          $ref: 'components/responses.yaml#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
 
-  /document:
+  /document/{resource}:
     get:
       operationId: document
       summary: GET request on the document endpoint of the DTS API.
       description: The Document endpoint is used to access the content of document, as opposed to metadata (which is found in collections).
       parameters:
-        - $ref: 'components/navigation-query-params.yaml#/components/parameters/ResourceQ'
+        - $ref: 'components/navigation-path-params.yaml#/components/parameters/Resource'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/RefQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/StartQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
@@ -66,6 +67,7 @@ paths:
         - $ref: 'components/document-query-params.yaml#/components/parameters/MediaTypeQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: 'components/responses.yaml#/components/responses/DocumentOK'
@@ -85,6 +87,7 @@ components:
       description: The context of the resources. Used for fetching resources.
       required: false
       style: deepObject
+      explode: true
       schema:
         type: object
         additionalProperties:
@@ -99,3 +102,12 @@ components:
         type: object
         additionalProperties:
           type: string
+    DirectResource:
+      name: direct
+      in: query
+      description: Whether to get the resource directly by id (= relative path) instead of looking the location up in the collection metadata.
+      schema:
+        type: boolean
+        default: false
+      required: false
+      allowEmptyValue: true

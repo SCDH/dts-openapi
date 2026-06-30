@@ -4,13 +4,13 @@ info:
   description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
-  /collection:
+  /collection/{id}:
     get:
       operationId: collection
       summary: GET request on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
-        - $ref: '#/components/parameters/IdQ'
+        - $ref: '#/components/parameters/Id'
         - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/NavQ'
         - $ref: '#/components/parameters/ResourceContext'
@@ -19,18 +19,18 @@ paths:
         "200":
           $ref: '#/components/responses/CollectionOK'
         "400":
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/LODBadRequest'
         "404":
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
-  /navigation:
+  /navigation/{resource}:
     get:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API.
       description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
-        - $ref: '#/components/parameters/ResourceQ'
+        - $ref: '#/components/parameters/Resource'
         - $ref: '#/components/parameters/RefQ'
         - $ref: '#/components/parameters/StartQ'
         - $ref: '#/components/parameters/EndQ'
@@ -39,22 +39,23 @@ paths:
         - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
         "400":
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/LODBadRequest'
         "404":
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
-  /document:
+  /document/{resource}:
     get:
       operationId: document
       summary: GET request on the document endpoint of the DTS API.
       description: The Document endpoint is used to access the content of document, as opposed to metadata (which is found in collections).
       parameters:
-        - $ref: '#/components/parameters/ResourceQ'
+        - $ref: '#/components/parameters/Resource'
         - $ref: '#/components/parameters/RefQ'
         - $ref: '#/components/parameters/StartQ'
         - $ref: '#/components/parameters/EndQ'
@@ -62,6 +63,7 @@ paths:
         - $ref: '#/components/parameters/MediaTypeQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/DirectResource'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -80,6 +82,7 @@ components:
       description: The context of the resources. Used for fetching resources.
       required: false
       style: deepObject
+      explode: true
       schema:
         type: object
         additionalProperties:
@@ -94,6 +97,15 @@ components:
         type: object
         additionalProperties:
           type: string
+    DirectResource:
+      name: direct
+      in: query
+      description: Whether to get the resource directly by id (= relative path) instead of looking the location up in the collection metadata.
+      schema:
+        type: boolean
+        default: false
+      required: false
+      allowEmptyValue: true
     Id:
       name: id
       in: path
@@ -101,6 +113,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     Page:
       name: page
       in: path
@@ -125,6 +139,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
     PageQ:
       name: page
       in: query
@@ -149,6 +165,14 @@ components:
       required: false
       schema:
         type: string
+    Resource:
+      name: resource
+      in: path
+      description: The unique identifier for the Resource being navigated
+      required: true
+      schema:
+        type: string
+        format: uri
     ResourceQ:
       name: resource
       in: query
@@ -603,3 +627,15 @@ components:
           schema:
             type: string
             format: binary
+    LODBadRequest:
+      description: Bad Request
+      content:
+        application/ld+json:
+          schema:
+            type: string
+    LODNotFound:
+      description: Not Found
+      content:
+        application/ld+json:
+          schema:
+            type: string

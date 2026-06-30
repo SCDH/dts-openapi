@@ -8,6 +8,8 @@ components:
       required: true
       schema:
         type: string
+        format: uri
+        default: general
 
     Page:
       name: page
