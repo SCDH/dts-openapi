@@ -1,5 +1,15 @@
 # Changes
 
+## 0.3.0
+
+- makes `id` of the collection endpoint and `resource` of navigation
+  and document a path parameter in the facade for better IRI
+  management
+- makes both paramters URIs for better encoding of complex URL-like
+  identifiers
+- adds `direct` flag parameter to the facade for controling internal
+  access to resources on SEED XC
+
 ## 0.2.0
 
 - adds collection endpoint to the facade
