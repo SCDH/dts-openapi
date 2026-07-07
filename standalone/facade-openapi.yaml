@@ -4,6 +4,23 @@ info:
   description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
+  /collection/:
+    get:
+      operationId: collectionDefault
+      summary: GET request for the default collection on the collection endpoint of the DTS API.
+      description: The collection endpoint is used for navigating collections. This path returns the default collection.
+      parameters:
+        - $ref: '#/components/parameters/ResourceContext'
+        - $ref: '#/components/parameters/FollowUpContext'
+      responses:
+        "200":
+          $ref: '#/components/responses/CollectionOK'
+        "400":
+          $ref: '#/components/responses/LODBadRequest'
+        "404":
+          $ref: '#/components/responses/LODNotFound'
+        "5XX":
+          description: Unexpected error
   /collection/{id}:
     get:
       operationId: collection
@@ -11,8 +28,8 @@ paths:
       description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
         - $ref: '#/components/parameters/Id'
-        - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/NavQ'
+        - $ref: '#/components/parameters/PageQ'
         - $ref: '#/components/parameters/ResourceContext'
         - $ref: '#/components/parameters/FollowUpContext'
       responses:
