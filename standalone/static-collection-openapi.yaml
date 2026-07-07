@@ -379,7 +379,6 @@ components:
       schema:
         type: string
         format: uri
-        default: general
     Page:
       name: page
       in: path
@@ -405,20 +404,18 @@ components:
       schema:
         type: string
         format: uri
-        default: general
     PageQ:
       name: page
       in: query
       description: The number of identifying a page in paginated query results.
-      required: false
       schema:
         type: integer
         default: 1
+      required: false
     NavQ:
       name: nav
       in: query
       description: Determines whether the content of the member property represents parent or child items.
-      required: true
       schema:
         type: string
         enum: [children, parents]

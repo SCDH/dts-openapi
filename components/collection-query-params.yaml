@@ -9,13 +9,11 @@ components:
       schema:
         type: string
         format: uri
-        default: general
 
     PageQ:
       name: page
       in: query
       description: Page of the current collection’s members
-      required: true
       schema:
         type: integer
         default: 1
@@ -24,7 +22,6 @@ components:
       name: nav
       in: query
       description: Determines whether the content of the member property represents parent or child items.
-      required: true
       schema:
         type: string
         enum: [ children, parents ]
