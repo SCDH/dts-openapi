@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.1
+
+- adds extra endpoint for default collection
+
 ## 0.3.0
 
 - makes `id` of the collection endpoint and `resource` of navigation
