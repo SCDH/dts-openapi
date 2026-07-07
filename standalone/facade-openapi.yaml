@@ -4,14 +4,14 @@ info:
   description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
-  /collection/:
+  /{provider}/{location}/collection/:
     get:
       operationId: collectionDefault
       summary: GET request for the default collection on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. This path returns the default collection.
       parameters:
-        - $ref: '#/components/parameters/ResourceContext'
-        - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
       responses:
         "200":
           $ref: '#/components/responses/CollectionOK'
@@ -21,7 +21,7 @@ paths:
           $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
-  /collection/{id}:
+  /{provider}/{location}/collection/{id}:
     get:
       operationId: collection
       summary: GET request on the collection endpoint of the DTS API.
@@ -30,8 +30,8 @@ paths:
         - $ref: '#/components/parameters/Id'
         - $ref: '#/components/parameters/NavQ'
         - $ref: '#/components/parameters/PageQ'
-        - $ref: '#/components/parameters/ResourceContext'
-        - $ref: '#/components/parameters/FollowUpContext'
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
       responses:
         "200":
           $ref: '#/components/responses/CollectionOK'
@@ -41,7 +41,7 @@ paths:
           $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
-  /navigation/{resource}:
+  /{provider}/{location}/navigation/{resource}:
     get:
       operationId: navigation
       summary: GET request on the navigation endpoint of the DTS API.
@@ -54,9 +54,9 @@ paths:
         - $ref: '#/components/parameters/DownQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/PageQ'
-        - $ref: '#/components/parameters/ResourceContext'
-        - $ref: '#/components/parameters/FollowUpContext'
         - $ref: '#/components/parameters/DirectResource'
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
       responses:
         "200":
           $ref: '#/components/responses/NavigationOK'
@@ -66,7 +66,7 @@ paths:
           $ref: '#/components/responses/LODNotFound'
         "5XX":
           description: Unexpected error
-  /document/{resource}:
+  /{provider}/{location}/document/{resource}:
     get:
       operationId: document
       summary: GET request on the document endpoint of the DTS API.
@@ -78,9 +78,9 @@ paths:
         - $ref: '#/components/parameters/EndQ'
         - $ref: '#/components/parameters/TreeQ'
         - $ref: '#/components/parameters/MediaTypeQ'
-        - $ref: '#/components/parameters/ResourceContext'
-        - $ref: '#/components/parameters/FollowUpContext'
         - $ref: '#/components/parameters/DirectResource'
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
       responses:
         "200":
           $ref: '#/components/responses/DocumentOK'
@@ -93,27 +93,22 @@ paths:
 # Used components must be imported here!
 components:
   parameters:
-    ResourceContext:
-      name: cr
-      in: query
-      description: The context of the resources. Used for fetching resources.
-      required: false
-      style: deepObject
-      explode: true
+    Provider:
+      name: provider
+      description: The type of content provider suitable for accessing the location.
+      in: path
+      required: true
       schema:
-        type: object
-        additionalProperties:
-          type: string
-    FollowUpContext:
-      name: cf
-      in: query
-      description: The context of the DTS API. Used for providing missing information for follow up links.
-      required: false
-      style: deepObject
+        type: string
+        format: uri
+    Location:
+      name: location
+      description: The base location of the project resources. This can be a DOI, an URL etc.
+      in: path
+      required: true
       schema:
-        type: object
-        additionalProperties:
-          type: string
+        type: string
+        format: uri
     DirectResource:
       name: direct
       in: query
