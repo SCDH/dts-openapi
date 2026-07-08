@@ -64,7 +64,6 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/DownQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/PageQ'
-        - $ref: '#/components/parameters/DirectResource'
         - $ref: '#/components/parameters/Provider'
         - $ref: '#/components/parameters/Location'
       responses:
@@ -91,7 +90,6 @@ paths:
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/EndQ'
         - $ref: 'components/navigation-query-params.yaml#/components/parameters/TreeQ'
         - $ref: 'components/document-query-params.yaml#/components/parameters/MediaTypeQ'
-        - $ref: '#/components/parameters/DirectResource'
         - $ref: '#/components/parameters/Provider'
         - $ref: '#/components/parameters/Location'
       responses:
@@ -123,12 +121,3 @@ components:
       schema:
         type: string
         format: uri
-    DirectResource:
-      name: direct
-      in: query
-      description: Whether to get the resource directly by id (= relative path) instead of looking the location up in the collection metadata.
-      schema:
-        type: boolean
-        default: false
-      required: false
-      allowEmptyValue: true
