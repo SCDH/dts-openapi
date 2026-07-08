@@ -1,5 +1,16 @@
 # Changes
 
+## 0.4.0
+
+- adds `provider` and `location` path parameters for every facade
+  endpoint that allow to select a resource provider (by values of
+  `file`, `urn` or `doi`) and a remote base location accessed through
+  the provider. Thus collection gets
+  `/{provider}/{location}/collection{id}{?nav}`. Other endpoints
+  similar.
+- adds tags to endpoints
+- removes the `direct` parameter again
+
 ## 0.3.1
 
 - adds extra endpoint for default collection
