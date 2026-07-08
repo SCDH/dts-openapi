@@ -7,6 +7,8 @@ paths:
   /{provider}/{location}/collection/:
     get:
       operationId: collectionDefault
+      tags:
+        - collection
       summary: GET request for the default collection on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. This path returns the default collection.
       parameters:
@@ -24,6 +26,8 @@ paths:
   /{provider}/{location}/collection/{id}:
     get:
       operationId: collection
+      tags:
+        - collection
       summary: GET request on the collection endpoint of the DTS API.
       description: The collection endpoint is used for navigating collections. A collection contains metadata for the collection itself and an array of members. Each member is either a Collection or a Resource.
       parameters:
@@ -44,6 +48,8 @@ paths:
   /{provider}/{location}/navigation/{resource}:
     get:
       operationId: navigation
+      tags:
+        - navigation
       summary: GET request on the navigation endpoint of the DTS API.
       description: In addition to the DTS specs this requires the path parameter 'collection', which can easily be passed around with the URI templates.
       parameters:
@@ -69,6 +75,8 @@ paths:
   /{provider}/{location}/document/{resource}:
     get:
       operationId: document
+      tags:
+        - document
       summary: GET request on the document endpoint of the DTS API.
       description: The Document endpoint is used to access the content of document, as opposed to metadata (which is found in collections).
       parameters:
