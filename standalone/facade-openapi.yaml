@@ -4,6 +4,25 @@ info:
   description: Collection, Navigation, and Document endpoints on a stateless microservice
   version: 1.0rc1
 paths:
+  /{provider}/{location}/entry:
+    get:
+      operationId: entry
+      tags:
+        - entry
+      summary: GET request for the DTS entry endpoint.
+      description: The DTS entry endpoint is a service registry with follow up links to other services.
+      parameters:
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
+      responses:
+        "200":
+          $ref: "#/components/responses/EntryOK"
+        "400":
+          $ref: '#/components/responses/LODBadRequest'
+        "404":
+          $ref: '#/components/responses/LODNotFound'
+        "5XX":
+          description: Unexpected error
   /{provider}/{location}/collection/:
     get:
       operationId: collectionDefault

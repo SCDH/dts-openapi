@@ -6,6 +6,25 @@ info:
 
 
 paths:
+  /{provider}/{location}/entry:
+    get:
+      operationId: entry
+      tags:
+        - entry
+      summary: GET request for the DTS entry endpoint.
+      description: The DTS entry endpoint is a service registry with follow up links to other services.
+      parameters:
+        - $ref: '#/components/parameters/Provider'
+        - $ref: '#/components/parameters/Location'
+      responses:
+        "200":
+          $ref: "components/responses.yaml#/components/responses/EntryOK"
+        "400":
+          $ref: 'components/responses.yaml#/components/responses/LODBadRequest'
+        "404":
+          $ref: 'components/responses.yaml#/components/responses/LODNotFound'
+        "5XX":
+          description: Unexpected error
   /{provider}/{location}/collection/:
     get:
       operationId: collectionDefault
