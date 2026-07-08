@@ -13,6 +13,9 @@ components:
         "@id":
           type: string
           description: The identifier of the API, generally its URL.
+        "@context":
+          type: object
+          description: The JSON-LD context.
         "@type":
           type: string
           description: Default Value. EntryPoint.
