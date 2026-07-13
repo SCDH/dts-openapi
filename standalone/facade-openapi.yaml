@@ -328,11 +328,14 @@ components:
             type: object
   responses:
     Graph:
-      description: An RDF graph or a SPARQL query for manipulating the input Graph.
+      description: An RDF graph. If application/sparql-update is requested, a SPARQL query for manipulating the input Graph is returned. For text/csv a table with selector changes is returned.
       content:
+        text/csv:
+          schema:
+            type: string
         application/sparql-update:
           schema:
-            type: object
+            type: string
         applicaton/ld+json:
           schema:
             type: object
