@@ -1,0 +1,54 @@
+components:
+  schemas:
+    SeedCollectionMetadata:
+      type: object
+      required:
+        - "@graph"
+        - "@context"
+      properties:
+        "@context":
+          $ref: 'context.yaml#/components/schemas/LODContext'
+          description: The JSON-LD context.
+        "@graph":
+          description: The Collection and Resource objects of the project.
+          type: array
+          items:
+            $ref: '#/components/schemas/SeedMetadata'
+    SeedMetadata:
+      type: object
+      required:
+        - "@id"
+        - "@type"
+        - collection
+      properties:
+        "@context":
+          $ref: 'context.yaml#/components/schemas/LODContext'
+          description: The JSON-LD context.
+        "@id":
+          type: string
+          description: The identifier of the Collection or Resource.
+        "@type":
+          type: string
+          description: The type. Collection or Resource.
+          enum: [ Collection, Resource ]
+        title:
+          type: string
+          description: A name for the Collection or Resource. Additional names may be placed in dublinCore using title, e.g. for internationalization.
+        member:
+          type: array
+          items:
+            $ref: 'id.yaml#/components/schemas/Id'
+        dublinCore:
+          $ref: 'dublinCore.yaml#/components/schemas/DublinCore'
+          description: Contains metadata following the Dublin Core Terms scheme.
+        extensions:
+          $ref: 'any.yaml#/components/schemas/Any'
+          description: Contains any supplementary metadata following other schemes.
+        download:
+          $ref: 'download.yaml#/components/schemas/Download'
+          description: A link or a key-value list of media types and links to downloadable versions of the Resource
+        citationTrees:
+          type: array
+          items:
+            $ref: 'citationTree.yaml#/components/schemas/CitationTree'
+          description:
