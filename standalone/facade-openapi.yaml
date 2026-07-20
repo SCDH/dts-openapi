@@ -115,13 +115,13 @@ paths:
           $ref: '#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
-  /{provider}/{location}/oa/normalize/{resource}:
+  /{provider}/{location}/oa/forward/{resource}:
     post:
-      operationId: standoffNormalize
+      operationId: standoffForward
       tags:
         - standoff
-      summary: Normalize OpenAnnotation selectors
-      description: The preimage of the DTS resource is the stored document; its representation is a partial and/or media type view. This endpoints recalculates pointers from the latter to the former.
+      summary: Calculate OpenAnnotation selectors for a view of the DTS resource.
+      description: The preimage of the DTS resource is the stored document; its view is a partial and/or media type representation. This endpoints recalculates pointers from the former to the latter; the pointer transformation has the same direction as the document transformation, hence forward.
       requestBody:
         $ref: '#/components/requestBodies/Graph'
       parameters:
@@ -142,13 +142,13 @@ paths:
           $ref: '#/components/responses/NotFound'
         "5XX":
           description: Unexpected error
-  /{provider}/{location}/oa/view/{resource}:
+  /{provider}/{location}/oa/backward/{resource}:
     post:
-      operationId: standoffRepresentation
+      operationId: standoffBackward
       tags:
         - standoff
-      summary: Calculate OpenAnnotation selectors for a view of the DTS resource.
-      description: The preimage of the DTS resource is the stored document; its view is a partial and/or media type representation. This endpoints recalculates pointers from the former to the latter.
+      summary: Normalize OpenAnnotation selectors
+      description: The preimage of the DTS resource is the stored document; its representation is a partial and/or media type view. This endpoints recalculates pointers from the latter to the former; the pointer transformation has the opposite direction as the document transformation, hence backward.
       requestBody:
         $ref: '#/components/requestBodies/Graph'
       parameters:
