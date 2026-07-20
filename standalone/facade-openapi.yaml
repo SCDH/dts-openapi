@@ -123,7 +123,7 @@ paths:
       summary: Calculate OpenAnnotation selectors for a view of the DTS resource.
       description: The preimage of the DTS resource is the stored document; its view is a partial and/or media type representation. This endpoints recalculates pointers from the former to the latter; the pointer transformation has the same direction as the document transformation, hence forward.
       requestBody:
-        $ref: '#/components/requestBodies/Graph'
+        $ref: '#/components/requestBodies/Annotations'
       parameters:
         - $ref: '#/components/parameters/Resource'
         - $ref: '#/components/parameters/RefQ'
@@ -150,7 +150,7 @@ paths:
       summary: Normalize OpenAnnotation selectors
       description: The preimage of the DTS resource is the stored document; its representation is a partial and/or media type view. This endpoints recalculates pointers from the latter to the former; the pointer transformation has the opposite direction as the document transformation, hence backward.
       requestBody:
-        $ref: '#/components/requestBodies/Graph'
+        $ref: '#/components/requestBodies/Annotations'
       parameters:
         - $ref: '#/components/parameters/Resource'
         - $ref: '#/components/parameters/RefQ'
@@ -295,37 +295,26 @@ components:
       schema:
         type: string
   requestBodies:
-    Graph:
-      required: true
-      description: An RDF graph
+    Annotations:
+      description: The annotations to be transformed
       content:
-        applicaton/ld+json:
+        multipart/form-data:
           schema:
             type: object
-        text/turtle:
-          schema:
-            type: object
-        application/rdf+xml:
-          schema:
-            type: object
-        application/n-triples:
-          schema:
-            type: object
-        text/trig:
-          schema:
-            type: object
-        application/n-quads:
-          schema:
-            type: object
-        application/trix+xml:
-          schema:
-            type: object
-        application/rdf+thrift:
-          schema:
-            type: object
-        application/rdf+protobuf:
-          schema:
-            type: object
+            required:
+              - annotations
+            properties:
+              annotations:
+                description: An RDF graph
+                type: string
+              frame:
+                type: object
+                description: A JSON-LD frame for framing the output when JSON is requested.
+            encoding:
+              annotations:
+                contentType: application/ld+json
+              frame:
+                contentType: application/json
   responses:
     Graph:
       description: An RDF graph. If application/sparql-update is requested, a SPARQL query for manipulating the input Graph is returned. For text/csv a table with selector changes is returned.
