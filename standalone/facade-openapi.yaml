@@ -305,11 +305,9 @@ components:
               - annotations
             properties:
               annotations:
-                description: An RDF graph
-                type: string
+                $ref: '#/components/schemas/Graph'
               frame:
-                type: object
-                description: A JSON-LD frame for framing the output when JSON is requested.
+                $ref: '#/components/schemas/Frame'
             encoding:
               annotations:
                 contentType: application/ld+json
@@ -438,6 +436,20 @@ components:
           schema:
             type: string
   schemas:
+    Graph:
+      description: An RDF graph
+      summary: This schema is here for type mapping in implementations.
+      type: object
+      properties:
+        annotations:
+          type: object
+    Frame:
+      description: A JSON-LD frame for framing the output when JSON is requested.
+      summary: This schema is here for type mapping in implementations.
+      type: object
+      properties:
+        frame:
+          type: object
     Any:
       nullable: true
       anyOf:
